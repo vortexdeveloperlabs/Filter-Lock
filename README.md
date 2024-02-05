@@ -2,8 +2,6 @@
 
 [Dev Docs](./DEV.md)
 
-> TODO: I still need to move a lot of sections here to the Dev DOcs
-
 Filter Lock makes your links almost unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing.
 
 Whenever you see `Config option: ...` this will correspond to a JSON property that can be configured through config.json or through Dispenser

@@ -1,6 +1,6 @@
 # Filter Lock Dev Docs Proposal
 
-Filter Lock makes your links almost unblockable and prevents automatic blocking and scanning
+> TODO: I still need to move a lot of sections here to the README
 
 ## Lock modes
 
