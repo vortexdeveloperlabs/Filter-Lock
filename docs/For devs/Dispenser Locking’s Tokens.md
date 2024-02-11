@@ -92,26 +92,26 @@ function genNonce(nonceLen: number) {
 // The functionality decode function returned going to internally depend upon config.tokenType
 import decode from ...;
 
-function deconstructOneTimeID() {
+function deconstructOneTimeToken() {
     // TODO: ...
 }
 
 // TODO: ...
 
-export default checkOneTimeID;
-export { deconstructPrivateID };
+export default checkOneTimeToken;
+export { deconstructPrivateToken };
 ```
 
 `ENCRYPTION_KEY` `DELIMITER` `Encode(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `Encode(`**HMAC Hash of thumbmarkjs ID**`)` `DELIMITER` `Encode(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` UNIX Timestamp `Encode(`**nonce**`)`
 
-#### Private ID
+#### Private Token
 
 ```ts
 import config from ...;
 // The functionality decode function returned going to internally depend upon config.tokenType
 import decode from ...;
 
-function deconstructPrivateID(id: string) {
+function deconstructPrivateToken(id: string) {
     // Parse into segments
     const [key, encHMACHashedNetworkFingerprint, encHMACHashedBrowserFingerprint, encSnowflakeID, encTimestampStr, nonce] = id.split(config.delimiterChar);
 
@@ -133,10 +133,10 @@ function deconstructPrivateID(id: string) {
 }
 
 // If pass
-function checkPrivateID(): boolean {
+function checkPrivateToken(): boolean {
      // TODO: ...
 }
 
-export default checkPrivateID;
-export { deconstructPrivateID };
+export default checkPrivateToken;
+export { deconstructPrivateToken };
 ```

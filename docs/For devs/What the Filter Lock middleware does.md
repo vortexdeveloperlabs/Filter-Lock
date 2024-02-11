@@ -6,7 +6,7 @@ This is a technical overview; you don't need to implement this, since I already 
 
 > A lot of the sections haven't been started yet
 
-## For Filter Bot Lock
+## For Filter Bot Locking
 
 ### When using the One-time Token
 

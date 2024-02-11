@@ -15,11 +15,11 @@ If the auth fails, no error is returned, instead it will pass the request to the
 > This doesn't need any form of encoding, because it will never be used by the site itself and there not affectable by extension-based request repeating
 
 - `Filter Lock API`/genOneTimeToken
-  - It returns: `the key` (body) with a `200` status code
+  - It returns: `the One-time Token` (body) with a `200` status code
 - `Filter Lock API`/revokePrivateToken
   - It returns: a `200` status code
 - `Filter Lock API`/listTokens
-  - A `JSON response of the deconstructed Tokens in "OneTimeIDs" or "PrivateIDs" array` (body)
+  - A `JSON response of the deconstructed Tokens in "OneTimeTokens" or "PrivateTokens" array` (body)
 
 ### [Site / Trading](https://hedge.soundar.eu.org/s/1J_rfGDAb#When-using-the-One-time-Token)
 

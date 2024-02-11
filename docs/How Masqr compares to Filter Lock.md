@@ -1,8 +1,10 @@
-# How Masqr compares to Filter Lock
+# How [Masqr](https://github.com/titaniumnetwork-dev/MasqrProject) compares to Filter Lock
 
 > This is a working document
 
 Masqr is a solution to link leaking inspired by Filter Lock by Titanium Network. I don't mean to "expose" Masqr, but I think the solution is rushed, and probably for a good reason. Link leaking is a problem, but that's only because proper protections aren't in place. Masqr only aims to solve once specific part of it, manual filtering, which isn't remotely relevant anymore. It still has a lot of flaws, that they can fix.
+
+You could also use Masqr and Filter Lock together, but with using Filter Lock only for certain features besides locking
 
 ### Request Repeating
 
@@ -10,7 +12,7 @@ Due to [Request Repeating](For devs/Index.md#Terms), the Masqr sets internally m
 
 ### All the endpoints are still exposed
 
-#### Exposed Query URL's
+#### Exposed Query URLs
 
 I admit this is a minor thing, but query urls are more scrutinized by Filters.
 
@@ -22,19 +24,15 @@ The bare endpoints and proxy config files are still exposed in Masqr
 
 In Filter Lock encryption and standard file encoding is applied which helps. This makes use of custom bare transports. Additionally, when requests are send for the main proxy SW file, the shimmed BareClient replaces what was there before.
 
-#### proxy file
+#### Proxy files
 
-This isn't as bad as the bare endpoints being exposed, because it is behind Masqr, but they can still be repeated. Filter Lock applies proxy file encryption, and a simple path rewriter is injected into the index.html files that corresponds to the key that is used there.
+This isn't as bad as the bare endpoints being exposed, because it is behind Masqr, but they can still be repeated. Filter Lock "wraps" the html.
 
 ### Flaws with key generation
 
 #### The keys for generating the cookie are common
 
 Interally, there set is list of PSK keys that encompass every domain that are used for every user
-
-#### Masqr doesn't store the valid keys persistingly
-
-They store them in an array, which will be deleted after the program ends. In Filter Lock the keys are stored in SQLite.
 
 ### Masqr doesn't allow metadata to pass through, which can help spread the links on Social Media or Search Engines
 
