@@ -1,5 +1,7 @@
 # Filter Lock
 
+> TODO: I still need to seperate many of the Developer notes into normal (user) docs as well
+
 [Developer notes](./docs/For%20devs/Index.md)
 
 Filter Lock makes your links nearly unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing. It works through HTTP Router Middleware.
