@@ -8,7 +8,7 @@ You could also use Masqr and Filter Lock together, but with using Filter Lock on
 
 ### Request Repeating
 
-Due to [Request Repeating](For devs/Index.md#Terms), the Masqr sets internally means little. Additionally as a user, you can bypass the protections with a single cookie. The token in filter lock can't be repeated.
+Due to [Request Repeating](./devs/Index.md#Terms), the Masqr sets internally means little. Additionally as a user, you can bypass the protections with a single cookie. The token in filter lock can't be repeated.
 
 ### All the endpoints are still exposed
 
