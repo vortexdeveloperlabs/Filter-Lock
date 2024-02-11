@@ -1,81 +1,72 @@
-# Filter Lock Proposal
+# Filter Lock
 
-[Dev Docs](./DEV.md)
+[Dev Docs](./docs/For%20devs/Index.md)
 
-Filter Lock makes your links almost unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing.
+Filter Lock makes your links nearly unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing. It works through HTTP Router Middleware.
 
-Whenever you see `Config option: ...` this will correspond to a JSON property that can be configured through config.json or through Dispenser
+## Middleware Backends
 
-## Configuring the methods used
+Filter Lock will have many different "backends" for different frameworks in many languages, such as MW. For example: JS (Hono, Express), Rust (Tower Middleware/Axum), Go, and PHP
 
-You will be able to choose which ones you in the config file with a bitwise enum
+> Please ask, if you want me to make a custom backend for your use cases
 
-## Backends
+## Methods used
 
-Filter Lock will have different "backends" for different frameworks in many languages, such as MW. For example: JS (Hono, Express), Rust (Tower MW/Axum), Go, and PHP.
+> You will able to choose which methods are ussed in the config file with a bitwise enum
 
-Please ask, if you want me to make a custom backend for
+### [Link Bot Locking](./docs/For%20devs/link)
 
-## Extra features
+> [Dispenser V3](https://github.com/VyperGroup/Dispenser) will be my flagship implementation of Filter Bot locking when it releases
 
-> Any of these features will be brought to Masqr in my project that adds supplemental server middleware to Masqr, making it easier to implement and more extensible. It will have the same config as Filter lock, but minus a few things, due to their architecural differences.
+### Filter testing
+
+Filter testing involves checking the user's device for Extensions or testing for Network Blocks.
+
+### School student checking
+
+This requires that you provide your own Google API key for [implicit flow OAuth V2](https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow) or if you use GCloud [Identity Platform](https://cloud.google.com/identity-platform/docs/web/google)
+
+> Even if external sign-in is blocked by the workspace, you can actually detect that
+
+This is the easiest to use on a GAS-based proxy site.
+
+## Extra (listed by importance)
 
 ### Auto 404 cloaking
 
-This will be configurable through `Config option: filter_lock.seo_passthrough.status`
+There's a quirk in Chrome where any site with a status code of 404 won't show in in. This will automatically force all the status codes to be 404 when a Chrome User Agent is sent in the Filter Lock middleware.
 
-There's a quirk in Chrome where any site with a status code of 404 won't show in in. This will automatically force all the status codes to be 404 when a Chrome User Agent is sent.
+### [Site / Bare content encoding](./docs/For%20devs/"Wrapping"%20methods.md)
 
-### Auto-escaping
+#### Restrict use of terms
 
-This will be configurable through `Config option: filter_lock.auto_escaping.status`
-You can choose the RegExp values through `Config option: filter_lock.auto_escaping.matches {string[] of RegExps}`. The RegExp's will be validated before being put inside of the DB, and if they are incorrect it will respond with an error message.
+In the config, you will be able to set RegExps to grab specific phrases. This will make it so that all the text nodes in the HTML document that is going to be returned is parsed before hand, and if a RegExp matches, it will be escaped, so that the filter won't autoblock it
 
-You will be able to set RegExps to grab specific phrases or keywords. This will make it so that all the text nodes in the HTML document that is going to be returned is parsed before hand, and if a RegExp matches, it will be escaped, so that the filter won't auto-block it
+### Proxy SW randomization
 
-### arc.io Widger Hider
+> TODO: ...
 
-This will be configurable through `Config option: filter_lock.hide_arc_widget`
+### Cosmetic
 
-This is an option that will cosmetically hide the arc.io widget once you have passed the checks. This will use aero's sandboxing library, so the script doesn't detect styles on it.
-
-### Proxy code randomization
-
-`Config option: filter_lock.seo_passthrough.status`
-
-The files for your proxy will have their names altered and references to those names. Similar how VSCode updates references when you rename a file.
-
-### SEO Passthrough
-
-This will be configurable through dispenser with `Config option: filter_lock.seo_passthrough.status`
-
-Passthrough basically means that the code relevant to SEO will remain, but only when it recognizes the respective searchbot UA
-
-#### Generic search engine UA's
-
-This will passthrough any HTML that may be used identify the site such as:
-
-- meta tags
-- links
-
-##### Open Graph Fixer
-
-This will be configurable through dispenser with `Config option: filter_lock.seo_passthrough.open_graph`
+#### Open Graph Fixer
 
 Obviously, social media sites wanting check a site secured with filter lock by default would find no [Open Graph tags](https://ogp.me/), because the decoy page would be displayed. This would inject the og: tags from the normal site into the decoy site, if user agents for known social media scraper are recognized.
 
-#### Googlebot
+#### arc.io Hider
 
-This will be configurable through dispenser with `Config option: filter_lock.seo_passthrough.googlebot.status`
+This is an option that will cosmetically hide the arc.io widget once you have passed the checks. This will use aero's sandboxing library, so the script doesn't detect styles on it.
 
-##### React SPA routes
+## Integrations
 
-This will be configurable through dispenser with `Config option: filter_lock.seo_passthrough.react_spa_routes.status`
+### [Dispenser](...)
 
-### Dynamic Locking
+- I will provide webhook integrations sent from Dispenser to an API endpoint on Filter Lock for any of your working links.
+- There will be an optional web panel too
 
-This will be configurable through `Config option: filter_lock.seo_passthrough.status`
+These integrations will have the same functionality but a different UI. From both of these, you will be able to:
 
-This will work similar to anti-ddos solutions
+- Here you will be able to view the percentage of users that are blocked.
+- You must set the secret in your per-server bot settings.
+- This will be accessed from a per-server Dispenser command.
 
-There will be an option that will periodically lock down your links, depending on how frequently they are being blocked
+## [How this compares to Masqr](./docs/For%20devs/How%20Masqr%20compares%20to%20Filter%20Lock.md)
