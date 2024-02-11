@@ -1,6 +1,6 @@
 # Filter Lock
 
-[Dev Docs](./docs/For%20devs/Index.md)
+[Developer notes](./docs/For%20devs/Index.md)
 
 Filter Lock makes your links nearly unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing. It works through HTTP Router Middleware.
 
