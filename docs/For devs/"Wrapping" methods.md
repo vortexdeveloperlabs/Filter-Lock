@@ -1,4 +1,4 @@
-# "Wrapping" methods - Dev Docs
+# "Wrapping" methods - Developer notes
 
 > TODO: Make a version of this, but without technical explanations in the parent folder (..)
 

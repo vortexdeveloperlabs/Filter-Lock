@@ -1,4 +1,4 @@
-# Dispenser Locking's Tokens - Dev Docs
+# Dispenser Locking's Tokens - Developer notes
 
 [Parent](./Index.md)
 

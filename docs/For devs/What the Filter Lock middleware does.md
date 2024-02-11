@@ -1,4 +1,4 @@
-# What the Filter Lock middleware does - Dev Docs
+# What the Filter Lock middleware does - Developer notes
 
 [Parent](./Index.md)
 

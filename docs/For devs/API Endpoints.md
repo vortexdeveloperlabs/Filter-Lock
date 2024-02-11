@@ -1,4 +1,4 @@
-# API Endpoints - Dev Docs
+# API Endpoints - Developer notes
 
 [Parent](./Index.md)
 

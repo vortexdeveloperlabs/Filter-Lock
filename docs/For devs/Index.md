@@ -1,4 +1,4 @@
-# [Filter Lock](./What%20the%20Filter%20Lock%20middleware%20does.md) Dev Docs (Index)
+# [Filter Lock](./What%20the%20Filter%20Lock%20middleware%20does.md) Developer Notes (Index)
 
 [Parent](../../README.md)
 
