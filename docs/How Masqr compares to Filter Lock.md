@@ -24,6 +24,8 @@ The bare endpoints and proxy config files are still exposed in Masqr
 
 In Filter Lock encryption and standard file encoding is applied which helps. This makes use of custom bare transports. Additionally, when requests are send for the main proxy SW file, the shimmed BareClient replaces what was there before.
 
+> Of course, you could argue that doing this in Masqr would be bloated and it is not the responsibility for them to encourage implementations for a specific standard.
+
 #### Proxy files
 
 This isn't as bad as the bare endpoints being exposed, because it is behind Masqr, but they can still be repeated. Filter Lock "wraps" the html.
@@ -38,4 +40,4 @@ Interally, there set is list of PSK keys that encompass every domain that are us
 
 ### Wouldn't Masqr help manual filtering?
 
-Yes, but that assumes the sysadmins don't have alts in TN, and besides almost all proxy filtering nowadays is done manually with manual reviews being the only way to clear possible links.
+Yes, but that assumes the K12 Sysadmins don't have alts in TN, and besides almost all proxy filtering nowadays is done manually with manual reviews being the only way to clear possible links.
