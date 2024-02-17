@@ -6,31 +6,63 @@
 
 This documents components that both the tokens use:
 
+> The question mark means that the specified thing isn't done by default not optional. Optional features are specified in the children (subheadings below).
+
 ### Delimiter
 
-The delimiter is a character that is not used in anywhere else in the actual token and it is used to split each part into what its respective purpose is. By default, this will be a newline terminator.
+The delimiter is a character or a string (sequence of characters) that is not used in anywhere else in the actual token and it is used to split each part into what its respective purpose is. By default, this will be a newline terminator `\n`.
 
-### Encoding
+I recommend making the delimiter of your choice distinct from what is present on other proxy sites. For implementers of this standard, please allow the proxy site hoster to easily configure the delimiter.
 
-Encoding prevents Filters from identifying the segments of the token through patterns The recommended encoding type for the token is XOR due it not adding any extra length due to it being a ceaser cypher, but it is ulimately up to the Filter Lock config. There will be a config option where you pass in your own Encoder class with the constructor being the token and it having the properties encode and decode available. The encoding token in the token shall be different per token.
+### Encoding/Encryption
+
+The encryption keys in the token shall be different per token.
+
+Whatever encryption algorithms you use, make sure that no characters algorithm exceed the bounds of what is allowed in a cookie or are used in the delimiter.
+
+You may also want to allow the proxy site hoster to specify what kind of encryption algorithm they want to use.
+
+#### Subsitution encryption
+
+> `SUB_ENCRYPTION_KEY`, `subEncrypt()`.
+
+They are shorthand for text subsitution-based (Ceaser Cypher-like) algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
+
+This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
+
+#### Symmetrical encryption
+
+> `symEncrypt(`_msg_, _plaintext key_`)`.
+
+This is used to decrypt the Browser Fingerprints using the unhashed Network Fingerprints. This should be an ag.. I recommend using blowfish with a plaintext key with no nonce.
 
 ### nonce
 
-A nonce is used to ensure these tokens are distinct, so that they can't be bruteforced easily. It is the only thing that can't be assumed easily. You can actually disable nonce for One-time Tokens or Perm Tokens.
+> `Encode?(` `**nonce**` `)`
+
+A nonce is used to ensure these tokens are distinct adding a hint of entropy, so that they can't be generated easily or conflict with other identical fingerprints. It is the only thing that can't be assumed easily.
+
+The nonce should be at the end with the exception of optional features in the tokens. This is because the nonce is used in most cases, but it is at the end because there is little reason to parse the nonce at the end unless you make use of the optional features yourself.
+
+> The length of the nonce should be easily changeable and the nonce should be easily removeable by the proxy site hoster
 
 ### The Discord Snowflake Tokens
 
 This allows you to identify who the token is for, so that you can you can revoke their tokens.
 
+> It should be sub encrypted because the first few numbers of the Discord Snowflake obviously won't change much over a short period of time and a number of that length can easily be detected.
+
 ### UNIX timestamp
 
 The UNIX timestamp allows for the tokens to be able to be dated, therefore allowing them to be revoked in the future or non-invasive telemetry purposes. It also adds a hit of entropy for bruteforcers.
 
-> It should be encoded because the first few digits of the UNIX Timestamp obviously won't change much over a short period of time.
+> It should be sub encrypted because the first few digits of the UNIX Timestamp obviously won't change much over a short period of time and a number of that length can easily be detected.
 
 ### HMAC hashing
 
 HMAC is a cryptographically secure hashing algorithm that is [natively supported in the browser](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#hmac). It is used to prevent the Filter Lock hoster from deanonymizing users based on their fingerprints, while still verifying them.
+
+> The HMAC hash should use SHA-256 by default
 
 ## Tokens
 
@@ -43,8 +75,7 @@ When reading the token description keep in mind:
 
 ### One-time (Temp)
 
-`ENCRYPTION_
-` `DELIMITER` `Encode(`**The user's Discord Snowflake ID**`)` `DELIMITER` `Encode(`**UNIX Timestamp`)` `DELIMITER` `Encode(`**nonce\*\*`)`
+`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster. This token will only be valid once
 
@@ -52,91 +83,14 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 > It's called Private, because it is locked to a certain device
 
-`ENCRYPTION_KEY` `DELIMITER` `Encode(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `Encode(`**HMAC Hash of thumbmarkjs ID**`)` `DELIMITER` `Encode(`**The user's Discord snowflake ID**`)` `DELIMITER` UNIX Timestamp `DELIMITER` `nonce`
+`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
 
 Upon your initial and final usage of the PSK, the Filter Lock server middleware will inject a script that will set a cookie to the Private Tokens, which will be used to verify later requests.
 
 #### Network-identifiable fingerprint
 
-The UA and IP Address. This is verified on the server in Filter Lock's server middleware on every request. This is important, because the Browser-identifiable fingerprinting can be spoofed by the filter.
+The UA and IP Address. This is verified on the server in Filter Lock's server middleware on every request. This is important, because the Browser-identifiable fingerprinting can be spoofed by the filter, especially dangerous when used in a request repeating attack.
 
 #### Browser-identifiable fingerprint
 
-The ThumbMarkJS Token. This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
-
-## How to
-
-### Generate the nonce
-
-```ts
-// Not finished
-function genNonce(nonceLen: number) {
-  // Generates 6 values at a time
-  const dividend = Math.floor(nonceLen / 6);
-  const hasRemainder = nonceLen % 6 === 0;
-  let timesToGen = divident;
-  if (hasRemainder) timesToGen++;
-  const randArr = new Uint32Array(timesToGen);
-  self.crypto.getRandomValues(randArr);
-  randArr.join("").substring(0, nonceLen);
-}
-```
-
-### Verify
-
-> The deconstructors are also exported, for the use in the `.../listTokens` API endpoint
-
-#### One-time Token
-
-```ts
-// The functionality decode function returned going to internally depend upon config.tokenType
-import decode from ...;
-
-function deconstructOneTimeToken() {
-    // TODO: ...
-}
-
-// TODO: ...
-
-export default checkOneTimeToken;
-export { deconstructPrivateToken };
-```
-
-`ENCRYPTION_KEY` `DELIMITER` `Encode(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `Encode(`**HMAC Hash of thumbmarkjs ID**`)` `DELIMITER` `Encode(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` UNIX Timestamp `Encode(`**nonce**`)`
-
-#### Private Token
-
-```ts
-import config from ...;
-// The functionality decode function returned going to internally depend upon config.tokenType
-import decode from ...;
-
-function deconstructPrivateToken(id: string) {
-    // Parse into segments
-    const [key, encHMACHashedNetworkFingerprint, encHMACHashedBrowserFingerprint, encSnowflakeID, encTimestampStr, nonce] = id.split(config.delimiterChar);
-
-    const decoder = new Decoder(key);
-
-    let ret = {
-        networkFingerprint: JSON.parse(decoder.decode(encHMACHashedNetworkFingerprint)),
-        networkBrowser: JSON.parse(decoder.decode(encHMACHashedNetworkFingerprint)),
-        creationDate: new Date(decoder.decode(encTimestampStr)),
-        snowflakeID: decoder.decode(encSnowflakeID),
-        nonce: node
-    };
-
-    if (nonce && config.nonce.enabled) {
-        ret.nonce = nonce;
-    }
-
-    return ret;
-}
-
-// If pass
-function checkPrivateToken(): boolean {
-     // TODO: ...
-}
-
-export default checkPrivateToken;
-export { deconstructPrivateToken };
-```
+The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
