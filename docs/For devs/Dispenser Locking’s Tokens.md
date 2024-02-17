@@ -83,7 +83,7 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 > It's called Private, because it is locked to a certain device
 
-`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
+`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 
 Upon your initial and final usage of the PSK, the Filter Lock server middleware will inject a script that will set a cookie to the Private Tokens, which will be used to verify later requests.
 
