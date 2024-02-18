@@ -1,6 +1,6 @@
 # Filter Lock
 
-> The official JS implementation can be found in src/. Anything you see there will most likely change because the code is not finished yet. Don't attempt to use it. Not even the TODO's are fully completed yet and some are outdated!
+> The official JS implementation can be found in src/. Anything you see there will most likely change because the code is not finished yet. Don't attempt to use it. Not even the TODO's or docs are fully completed yet and some are outdated!
 
 Filter Lock makes your links nearly unblockable and prevents automatic blocking and helps to prevent manual blocks. It works through HTTP Router Middleware.
 
