@@ -1,10 +1,20 @@
 /**
- *
- * @param length - How long the nonce is.
+ * @param length - The lowest possible length for a nonce
  * @param excludeChars - This would be the delimiter
- * @returns
+ * @returns - A string-compatible nonce with the length as specified in a range
  */
-function genNonceForCookies(length: number, excludeChars): string {
+function genNonceForCookiesWithLenInRandRange(
+  min: number,
+  max: number,
+  excludeChars = ""
+): string {}
+
+/**
+ * @param length - How long the nonce is
+ * @param excludeChars - This would be the delimiter
+ * @returns - A cookie-compatible nonce
+ */
+function genNonceForCookies(length: number, excludeChars = ""): string {
   const excludeSet = new Set(excludeChars);
 
   // Allowed characters for cookie names excluding control and separator characters
@@ -40,4 +50,4 @@ function genNonceForCookies(length: number, excludeChars): string {
   return new TextDecoder().decode(charCodes);
 }
 
-export default genNonceForCookies;
+export { genNonce, genNonceInRandRange, genNonceForCookies };

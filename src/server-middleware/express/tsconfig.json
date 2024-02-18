@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "moduleResolution": "NodeNext",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts", "index.d.ts", "index.ts"]
+}

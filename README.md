@@ -1,10 +1,12 @@
 # Filter Lock
 
-> TODO: I still need to seperate many of the Developer notes into normal (user) docs as well
+> The official JS implementation can be found in src/. Anything you see there will most likely change because the code is not finished yet. Don't attempt to use it. Not even the TODO's are fully completed yet and some are outdated!
+
+Filter Lock makes your links nearly unblockable and prevents automatic blocking and helps to prevent manual blocks. It works through HTTP Router Middleware.
+
+The best way to use Filter Lock is to reserve a certain % of your links to be Link Bot Locked and the rest to use Filter Testing.
 
 [Developer notes](./docs/For%20devs/Index.md)
-
-Filter Lock makes your links nearly unblockable and prevents automatic blocking and scanning, such as Google Safe Browsing. It works through HTTP Router Middleware.
 
 ## Middleware Backends
 
@@ -14,7 +16,7 @@ Filter Lock will have many different "backends" for different frameworks in many
 
 ## Methods used
 
-> You will able to choose which methods are ussed in the config file with a bitwise enum
+> You will able to choose which methods are used in the config file with a bitwise enum
 
 ### [Link Bot Locking](./docs/For%20devs/link)
 
@@ -26,17 +28,15 @@ Filter testing involves checking the user's device for Extensions or testing for
 
 ### School student checking
 
-This requires that you provide your own Google API key for [implicit flow OAuth V2](https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow) or if you use GCloud [Identity Platform](https://cloud.google.com/identity-platform/docs/web/google)
+This requires that you provide your own Google API key for [implicit flow OAuth V2](https://developers.google.com/identity/protocols/oauth2/javascript-implicit-flow) or if you use GCloud [Identity Platform](https://cloud.google.com/identity-platform/docs/web/google). This is the easiest to use on a GAS-based proxy site.
 
 > Even if external sign-in is blocked by the workspace, you can actually detect that
-
-This is the easiest to use on a GAS-based proxy site.
 
 ## Extra (listed by importance)
 
 ### Auto 404 cloaking
 
-There's a quirk in Chrome where any site with a status code of 404 won't show in in. This will automatically force all the status codes to be 404 when a Chrome User Agent is sent in the Filter Lock middleware.
+There's a quirk in Chrome where any site with a status code of 404 won't show in in. This automatically forces all the status codes to be 404 when a Chrome User Agent is sent in the Filter Lock middleware.
 
 ### [Site / Bare content encoding](./docs/For%20devs/"Wrapping"%20methods.md)
 
@@ -44,9 +44,7 @@ There's a quirk in Chrome where any site with a status code of 404 won't show in
 
 In the config, you will be able to set RegExps to grab specific phrases. This will make it so that all the text nodes in the HTML document that is going to be returned is parsed before hand, and if a RegExp matches, it will be escaped, so that the filter won't autoblock it
 
-### Proxy SW randomization
-
-> TODO: ...
+### [Proxy Resource randomization](./docs/)
 
 ### Cosmetic
 
