@@ -1,6 +1,6 @@
 # Filter Lock Link Bot Integration Guide
 
-Here is the [parent](../README.md)
+[parent](../README.md)
 
 ## Recommendations
 
