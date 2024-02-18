@@ -1,4 +1,5 @@
 /**
+ * TODO: Finish
  * @param length - The lowest possible length for a nonce
  * @param excludeChars - This would be the delimiter
  * @returns - A string-compatible nonce with the length as specified in a range
@@ -10,6 +11,7 @@ function genNonceForCookiesWithLenInRandRange(
 ): string {}
 
 /**
+ * TODO: Finish
  * @param length - How long the nonce is
  * @param excludeChars - This would be the delimiter
  * @returns - A cookie-compatible nonce

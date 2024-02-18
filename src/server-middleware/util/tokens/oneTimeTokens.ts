@@ -1,3 +1,5 @@
+// TODO: Make the content oneTimeTokens.ts into a OneTimeTokenUtils class similar to PrivateTokenUtils.ts
+
 // The functionality decode function returned going to internally depend upon config.tokenType
 import decode from ...;
 
