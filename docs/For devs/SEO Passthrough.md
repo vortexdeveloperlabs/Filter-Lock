@@ -1,4 +1,4 @@
-# SEO Passthrough
+# SEO Passthrough - Developer notes - Proposal
 
 Anything that can promote SEO that a search crawler looking for will be present, specifically only revealing things that are compatible with the search crawler. The search crawler will be detected by the UA. This includes niche things like the React routes, albiet without functionality present.
 
@@ -7,6 +7,8 @@ Anything that can promote SEO that a search crawler looking for will be present,
 TODO: ...
 
 ## Extra
+
+TODO: ...
 
 ### Backlinking
 
