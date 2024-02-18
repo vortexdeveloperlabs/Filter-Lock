@@ -75,7 +75,7 @@ When reading the token description keep in mind:
 
 ### One-time (Temp)
 
-`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
+Token: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster. This token will only be valid once
 
