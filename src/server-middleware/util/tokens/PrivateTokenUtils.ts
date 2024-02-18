@@ -6,7 +6,6 @@ import { Blowfish } from 'egoroof-blowfish';
 
 // TODO: Move these types to a module in index.d.ts
 
-
 class PrivateTokenUtils {
     privateToken: PrivateTokenTypes.PrivateToken;
 
@@ -18,7 +17,6 @@ class PrivateTokenUtils {
         const [subKey, subEnc_hmacHashed_NetworkFingerprint, subEnc_bfEnc_hmacHashed_BrowserFingerprint, encSnowflakeID, encTimestampStr, nonce] = id.split(config.delimiterChar);
     
         const subDecrypter = new SubDecrypter(subKey);
-    
     
         let ret = {
             hmacHashed_networkFingeprint: JSON.parse(subDecrypter.decrypt(subEnc_hmacHashed_NetworkFingerprint)),
