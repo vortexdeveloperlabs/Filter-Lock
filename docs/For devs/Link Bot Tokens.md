@@ -8,6 +8,8 @@ This documents components that both the tokens use:
 
 > The question mark means that the specified thing isn't done by default not optional. Optional features are specified in the children (subheadings below).
 
+The actual cookie names that are used for the token should be randomized and different per proxy site link. For now in my implementation, I have it so that it is something set in the config that applies to all of the proxy site links from the hoster, but I would like to have it so there is a KV store that correlates proxy site origins to their own randomized names (using genNonce) with the nonce length also being randomized.
+
 ### Delimiter
 
 The delimiter is a character or a string (sequence of characters) that is not used in anywhere else in the actual token and it is used to split each part into what its respective purpose is. By default, this will be a newline terminator `\n`.
