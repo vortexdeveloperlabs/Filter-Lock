@@ -1,9 +1,8 @@
 # "Wrapping" methods - Developer notes
 
-> 
-They will work by either redirecting to a new content type and extension or inject the HTML in a strange way.
+> They will work by either redirecting to a new content type and extension or inject the HTML in a strange way.
 
-[Parent](./Index.md)
+[Parent](../Index.md)
 
 ## srcdoc
 

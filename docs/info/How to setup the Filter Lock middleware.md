@@ -1,12 +1,16 @@
-# What the Filter Lock middleware does - Developer notes
+# What the Filter Lock middleware does
 
-[Parent](./Index.md)
+[Parent](../Index.md)
 
-This is a technical overview; you don't need to implement this, since I already did.
+## For Filter Bot Onboarding
 
-> A lot of the sections haven't been started yet
+Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](../For%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Token.md)".
 
-## For Filter Bot Locking
+### How to get the Sync Token from the Filter Lock middleware
+
+When you first start your web server, the Filter Lock middleware will set an onboarding token inside of a .env for you. You must use this token.
+
+## For Filter Bot Locking functionality
 
 ### When using the One-time Token
 
@@ -37,39 +41,3 @@ It will inject a script to your top of your site. It will read the token from th
 ## When there is no Private Token in the cookies
 
 It will show the decoy page, but it will also inject a script at the top which will look in localstorage and IndexedDB for the copy of the token. This is a protection against the token being mistakenly deleted. If one is found, it will reload and set the proper token.
-
-### For Filter Testing
-
-TODO: ...
-
-### Filter Testing methods
-
-> If `navigator.online` is false, it will be denied automatically
-
-> This will involve setting a Private Token similar to Filter Bot Locking, but without the Discord Snowflake ID
-
-#### 1: Extension checking
-
-```ts
-// From the manifest itself
-// TODO: Make this a type
-{
-    extName: string,
-    extId: string,
-    webAccessiblyResources: string[]
-}
-```
-
-#### 2: Image error checking
-
-This solution is simple and effective with and can be done with HTML and inline JS
-
-It involves setting an image URL to a favicon (which is almost always not restricted by cors) or another image on the site (maybe a CDN) and checking the onerror
-
-#### 3: CORS testing (not to be confused with aero's)
-
-This involves sending a Network Request to any resource that is usually CORS denied, but it is rejected for another reason
-
-### For OAuth Student Checking
-
-TODO: ...

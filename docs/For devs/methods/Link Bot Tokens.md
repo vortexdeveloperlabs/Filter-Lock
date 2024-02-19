@@ -1,6 +1,6 @@
 # Dispenser Locking's Tokens - Developer notes
 
-[Parent](./Index.md)
+[Parent](../README.md)
 
 ## The purpose of the:
 
@@ -79,13 +79,13 @@ When reading the token description keep in mind:
 
 Token: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
 
-By default it expires in 30 days, but this can be changed by the Filter Lock hoster. This token will only be valid once
+By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
 ### Private (Persistant)
 
 > It's called Private, because it is locked to a certain device
 
-`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
+`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 
 Upon your initial and final usage of the PSK, the Filter Lock server middleware will inject a script that will set a cookie to the Private Tokens, which will be used to verify later requests.
 
@@ -96,3 +96,9 @@ The UA and IP Address. This is verified on the server in Filter Lock's server mi
 #### Browser-identifiable fingerprint
 
 The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
+
+https://blog.amiunique.org/port-contention-goes-portable-port-contention-side-channels-in-web-browsers/
+https://blog.amiunique.org/an-explicative-article-on-drawnapart-a-gpu-fingerprinting-technique/
+
+https://forum.torproject.org/t/new-browser-fingerprinting-methods-ja3-and-akamai-hash/7649
+https://browserleaks.com/http2
