@@ -1,12 +1,12 @@
 # How to use the Link bot Integration Libraries
 
-> [parent](../../README.md)
+> [parent](../../../README.md)
 
 [Dispenser V3](https://github.com/VyperGroup/Dispenser) will be my flagship implementation of Filter Bot locking when it releases
 
 For many Discord bot frameworks, I provide helper libraries that can get you quickly get setup with the bot. I call these "Link bot Integration Libraries. It really is shrimple to setup a Filter Lock integration in your link bot.
 
-If you want to make your own implementation from scratch, [see the API for Filter Lock](../For%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md)
+> If you want to make your own implementation from scratch, [see the API for Filter Lock](../For%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md)
 
 ## How to setup link distribution
 

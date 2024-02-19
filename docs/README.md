@@ -27,7 +27,7 @@ In the documents linked here, you can find summaries of any method/mode or guide
 
 - [Filter Testing](./methods/Filter%20Testing.md)
   - [Resource Tunneling](./methods/Resource%20Tunneling.md)
-- [Filter Lock Link Bot Integration](./methods/Filter%20Lock%20Link%20Bot%20Integration%20Guide.md) (for link bot devs)
+- [Filter Lock Link Bot Integration](./info/how%20to%20implement/Link%20Bot%20Integration.md) (for link bot devs)
 
 ### Modes
 
