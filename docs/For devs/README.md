@@ -6,7 +6,8 @@ Developer Notes are for those interested in developing your own implementation. 
 
 ## Standards
 
-- [API Endpoints for Link Bot Link Bot Locking.md](./standards) (A standard as well)
+- [API Endpoints for Link Bot Link Bot Locking.md](./standards) (a standard as well)
+- [Sync Tokens](./standards/Sync%20Token.md) (onboarding for the Filter Lock middleware)
 
 ## Methods
 
@@ -18,7 +19,7 @@ Developer Notes are for those interested in developing your own implementation. 
     - [Browser Fingerprinting](./methods/Link%20Bot%20Tokens.md#Browser-identifiable%20fingerprint)
   - [Resource Tunneling](./Resource%20Tunneling.md)
 
-- [Filter Lock Link Bot Integration Guide](./Filter%20Lock%20Link%20Bot%20Integration%20Guide.md) (For link bot devs)
+- [Filter Lock Link Bot Integration Guide](./Filter%20Lock%20Link%20Bot%20Integration%20Guide.md) (for link bot devs)
 
 ### Modes (listed by importance)
 

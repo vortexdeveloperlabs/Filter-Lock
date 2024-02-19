@@ -83,7 +83,7 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 ### Private (Persistant)
 
-> It's called Private, because it is locked to a certain device
+> It's called Private, because it is locked to a certain device. This isn't something that you can share.
 
 `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 

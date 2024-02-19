@@ -17,7 +17,9 @@ In the documents linked here, you can find summaries of any method/mode or guide
 - modes - When I say this I refer to the optional features that are not methods. These are made to prevent filters from automatically blocking the links, rather than locking them down to students.
 - demo (main) links - Links that aren't protected by Filter Lock and are mainly used for showcasing the site
 - per-server staff - This means staff in the proxy community's Discord server that have permission over the bot. It's usually used to make a distinction from the proxy bot hoster.
-- Sync Token - See [this doc](./modes/"Wrapping"%20methods.md)
+- Types of tokens
+  - Sync Token - See [this doc](./For%20devs/standards/Sync%20Token.md)
+  - One-time/Private Token - See [this doc](./For%20devs/standards/Link%20Bot%20Tokens.md)
 
 > The lists are ordered by importance
 
