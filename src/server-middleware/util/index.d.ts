@@ -1,38 +1,208 @@
-// TODO: Document all the keys/properties/enum members with JSDoc according to how it is described in Dispenser Locking’s Tokens.md
-declare module "PrivateTokenTypes" {
-  export interface PrivateToken {
-    hmacHashed_networkFingeprint: string;
-    bfEnc_hmacHashed_browserFingeprint: string;
-    creationDate: Date;
-    expiryDate: Date;
+declare module "OneTimeTokenTypes" {
+  export interface OneTimeToken {
+    /**
+     * The user's Discord snowflake ID.
+     */
     snowflakeID: string;
-    nonce: string;
+
+    /**
+     * Date and time the token was created.
+     */
+    creationDate: Date;
+
+    /**
+     * Date and time the token expires (optional).
+     */
+    expiryDate?: Date;
+
+    /**
+     * Optional nonce added for uniqueness and protection against replay attacks.
+     */
+    nonce?: string;
   }
 
-  export interface NetworkVerifyPassthroughData {
-    ua: string /** The user's User Agent */;
-    clientHints: object; // An array containing the Client Hints headers and keys. All the keys must lowercased beforehand for consistency. If the UA's
-    ipAddr: string; // An IPV4 or IPV6 address
-    tlsFingerprint: string; // A JA3 fingerprint - See https://github.com/salesforce/ja3#how-it-works. If this is an empty string, it will deny unless HTTP is being used.
+  /**
+   * Interface representing data passed for network verification.
+   */
+  export interface OneTimePassthroughData {
+    fingerMarkJSID: string;
+
+    // TODO: ...
   }
 
-  export enum TokenValidityStatus {
-    PASS, // Anything member other than this is a failure
+  /**
+   * Enumeration representing the validity status of a token.
+   */
+  export enum OneTimeTokenValidityStatus {
+    /**
+     * Token is valid.
+     */
+    PASS,
+
+    /**
+     * Token has expired.
+     */
     EXPIRED,
-    NETWORK_FINGERPRINT_MISMATCH,
-  }
-  export enum TokenViolations {
-    NETWORK_FINGERPRINT_MISMATCH_UA,
-    NETWORK_FINGERPRINT_MISMATCH_CLIENT_HINTS,
-    NETWORK_FINGERPRINT_MISMATCH_IP_ADDRESS,
-    NETWORK_FINGERPRINT_MISMATCH_TLS_FINGERPRINT,
+
+    /**
+     * Browser fingerprint mismatch detected.
+     */
+    BROWSER_FINGEPRINT_MISMATCH,
   }
 
-  export interface NetworkVerifyRet {
-    status: TokenValidityStatus;
-    // Only present in a failure and if there are multiple types of violations for that failure type
-    violations: TokenViolations[];
+  /**
+   * Enumeration representing specific network fingerprint mismatch types.
+   */
+  export enum OneTimeTokenMismatchViolations {
+    fingerMarkJSID,
+    gpu, // This is kinda generic, I will split this into more categories
+    extensions,
+    ports,
+    dns,
   }
+
+  /**
+   * Interface representing the result of browser verification.
+   */
+  export interface BrowserVerifyRet {
+    /**
+     * Status of the token verification.
+     */
+    status: OneTimeTokenValidityStatus;
+
+    /**
+     * Optional array of specific violations detected in case of failure.
+     * Only present if `status` is not `PASS`.
+     */
+    violations?: OneTimeTokenMismatchViolations[];
+  }
+
+  // TODO: ...
 }
 
-declare module "OneTimeTokenTypes" {}
+declare module "PrivateTokenTypes" {
+  /**
+   * Interface representing a private dispenser locking token.
+   */
+  export interface PrivateToken {
+    /**
+     * HMAC hash of the network-identifiable fingerprint, encrypted using the subEncryption key.
+     * This value is used to verify the user's network fingerprint on the server side.
+     */
+    hmacHashed_networkFingeprint: string;
+
+    /**
+     * Encrypted value containing the HMAC hash of the browser-identifiable fingerprint,
+     * encrypted with the symmetric encryption key using the unhashed network fingerprint as a key.
+     * This value is used to verify the user's browser fingerprint on the client side.
+     */
+    bfEnc_hmacHashed_browserFingeprint: string;
+
+    /**
+     * The user's Discord snowflake ID.
+     */
+    snowflakeID: string;
+
+    /**
+     * Date and time the token was created.
+     */
+    creationDate: Date;
+
+    /**
+     * Date and time the token expires (optional).
+     */
+    expiryDate?: Date;
+
+    /**
+     * Optional nonce added for uniqueness and protection against replay attacks.
+     */
+    nonce?: string;
+  }
+
+  /**
+   * Interface representing data passed for network verification.
+   */
+  export interface NetworkVerifyPassthroughData {
+    /**
+     * Object containing HTTP headers used for fingerprinting, all keys in lowercase.
+     */
+    headers: {};
+
+    /**
+     * User's IP address (IPv4 or IPv6).
+     */
+    ipAddr: string;
+
+    /**
+     * Optional JA3 fingerprint (https://github.com/salesforce/ja3#how-it-works).
+     * Required for HTTPS connections, ignored otherwise.
+     */
+    tlsFingerprint?: string;
+
+    /**
+     * Optional Akamai hash required for HTTP2 connections (https://browserleaks.com/http2).
+     */
+    akamaiHash?: string;
+  }
+
+  /**
+   * Enumeration representing the validity status of a token.
+   */
+  export enum PrivateTokenValidityStatus {
+    /**
+     * Token is valid.
+     */
+    PASS,
+
+    /**
+     * Token has expired.
+     */
+    EXPIRED,
+
+    /**
+     * Network fingerprint mismatch detected.
+     */
+    NETWORK_FINGERPRINT_MISMATCH,
+  }
+
+  /**
+   * Enumeration representing specific network fingerprint mismatch types.
+   */
+  export enum PrivateTokenMismatchViolations {
+    /**
+     * Fingerprintable headers mismatch in network fingerprint.
+     */
+    HEADERS,
+
+    /**
+     * IP address mismatch in network fingerprint.
+     */
+    IP_ADDRESS,
+
+    /**
+     * JA3 fingerprint mismatch in network fingerprint.
+     */
+    NETWORK_FINGERPRINT_MISMATCH_JA3,
+
+    /**
+     * Akami fingerprint mismatch in network fingerprint.
+     */
+    NETWORK_FINGERPRINT_MISMATCH_AKAMI,
+  }
+
+  /**
+   * Interface representing the result of network verification.
+   */
+  export interface NetworkVerifyRet {
+    /**
+     * Status of the token verification.
+     */
+    status: PrivateTokenValidityStatus;
+
+    /**
+     * Optional array of specific violations detected in case of failure.
+     * Only present if `status` is not `PASS`.
+     */
+    violations?: PrivateTokenMismatchViolations[];
+  }
+}
