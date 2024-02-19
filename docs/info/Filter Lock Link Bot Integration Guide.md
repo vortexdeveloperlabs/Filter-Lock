@@ -64,6 +64,10 @@ To link the bot to your Filter Lock Middleware instance through its APIs, the pe
 
 Then it will DM that member asking for the Sync Token. It will have an embed with a textbox and a submit button. All you have to do is type in the Sync Token and then press the submit button. It's as shrimple as that. It will tell you if it was successfully linked or not.
 
+###### How to get the Sync Token from the Filter Lock middleware
+
+When you first start your web server, the Filter Lock middleware will set an onboarding token inside of a .env for you. You must use this token.
+
 #### How to setup per-server staff roles
 
 If you are a per-server staff with at least the permission level as set by the link bot hoster, you can change whoever can modify how the Filter Bot integration functions. You do this by changing a config: /fl config set permittedRoles ...[`user`]

@@ -11,8 +11,8 @@ Developer Notes are for those interested in developing your own implementation. 
 
 ## Methods
 
-- Filter Testing
-- Link Bot Locking
+- [Filter Testing Methods](./methods/Filter%20Testing%20Methods.md)
+- [Link Bot Locking](./standards/Link%20Bot%20Tokens.md)
 
   - [The Token System](./methods/Link%20Bot%20Tokens.md)
     - [Network fingerprinting](./methods/Link%20Bot%20Tokens.md#Network-identifiable%20fingerprint)

@@ -1,16 +1,14 @@
-# What the Filter Lock middleware does
+# What the Filter Lock middleware does - Developer Notes
 
 [Parent](../Index.md)
 
-## For Filter Bot Onboarding
+## It has APIs
 
 Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](../For%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Token.md)".
 
-### How to get the Sync Token from the Filter Lock middleware
+## Security
 
-When you first start your web server, the Filter Lock middleware will set an onboarding token inside of a .env for you. You must use this token.
-
-## For Filter Bot Locking functionality
+These are methods that only let students in
 
 ### When using the One-time Token
 
