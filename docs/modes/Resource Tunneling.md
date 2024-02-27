@@ -1,6 +1,6 @@
 # Resource Tunneling - Proposal
 
-[Developer notes](./For%20devs/Resource%20Tunneling.md)
+[Developer notes](../for%20devs/methods/Resource%20Tunneling.md)
 
 [Parent]()
 
@@ -8,4 +8,4 @@
 
 I'm working on an alternative to the Filter Lock's default Link Bot Locking behavior for verifying users.
 
-TODO: ...
+`TODO: ...`

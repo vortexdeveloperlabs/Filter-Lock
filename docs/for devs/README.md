@@ -6,7 +6,7 @@ Developer Notes are for those interested in developing your own implementation. 
 
 ## Standards
 
-- [API Endpoints for Link Bot Link Bot Locking.md](./standards) (a standard as well)
+- [API Endpoints for Link Bot Link Bot Locking.md](standards) (a standard as well)
 - [Sync Tokens](./standards/Sync%20Token.md) (onboarding for the Filter Lock middleware)
 
 ## Methods
@@ -23,7 +23,7 @@ Developer Notes are for those interested in developing your own implementation. 
 
 ### Modes (listed by importance)
 
-> Please see [How modes are implemented](./info/How%20modes%20are%20implemented.md) before reading any of the documents below.
+> Please see [How modes are implemented](./misc/How%20modes%20are%20implemented.md) before reading any of the documents below.
 
 - [Proxy Resource Randomization](./modes/Proxy%20Resource%20Randomization.md)
 - [DOM Access Prevention for Filters](./modes/DOM%20Access%20Prevention%20for%20Filters.md)

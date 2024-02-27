@@ -1,6 +1,6 @@
 ## Table of contents
 
-In the documents linked here, you can find summaries of any method/mode or guides for setting up Filter Lock for your proxy site or bot, but if you want a technical overview see [For developers](./For%20devs/Index.md).
+In the documents linked here, you can find summaries of any method/mode or guides for setting up Filter Lock for your proxy site or bot, but if you want a technical overview see [For developers](./for%20devs/Index.md).
 
 ## Glossary
 
@@ -18,16 +18,16 @@ In the documents linked here, you can find summaries of any method/mode or guide
 - demo (main) links - Links that aren't protected by Filter Lock and are mainly used for showcasing the site
 - per-server staff - This means staff in the proxy community's Discord server that have permission over the bot. It's usually used to make a distinction from the proxy bot hoster.
 - Types of tokens
-  - Sync Token - See [this doc](./For%20devs/standards/Sync%20Token.md)
-  - One-time/Private Token - See [this doc](./For%20devs/standards/Link%20Bot%20Tokens.md)
+  - Sync Token - See [this doc](./for%20devs/standards/Sync%20Token.md)
+  - One-time/Private Token - See [this doc](./for%20devs/standards/Link%20Bot%20Tokens.md)
 
 > The lists are ordered by importance
 
 ### Methods - These are [always exclusive to the middleware](./For)
 
 - [Filter Testing](./methods/Filter%20Testing.md)
-  - [Resource Tunneling](./methods/Resource%20Tunneling.md)
-- [Filter Lock Link Bot Integration](./info/how%20to%20implement/Link%20Bot%20Integration.md) (for link bot devs)
+  - [Resource Tunneling](./modes/Resource%20Tunneling.md)
+- [Filter Lock Link Bot Integration](./user%20guides/Link%20Bot%20Integration.md) (for link bot devs)
 
 ### Modes
 
@@ -37,9 +37,12 @@ In the documents linked here, you can find summaries of any method/mode or guide
 - [SEO Passthrough](./modes/SEO%20Passthrough.md)
 - [Auto Text Escaping](./modes/Auto%20Text%20Escaping.md)
 
+### If you want to simply get started and are a proxy site developer
+
+- [How to setup the Filter Lock middleware](./misc/How%20to%20setup%20the%20Filter%20Lock%20middleware.md) (for proxy site devs)
+
 ### General Information
 
-- [How to setup the Filter Lock middleware](./info/How%20to%20setup%20the%20Filter%20Lock%20middleware.md) (for proxy site devs)
-- [Proxies that Filter Lock supports](./info/Proxies%20that%20Filter%20Lock%20support.md)
-- [How your data is protected](./info/How%20your%20data%20is%20protected.md)
-- [How Filter Lock compares to Masqr](./info/How%20Filter%20Lock.md%20compares%20to%20Masqr)
+- [Proxies that Filter Lock supports](./misc/Proxies%20that%20Filter%20Lock%20support.md)
+- [How your data is protected](./misc/How%20your%20data%20is%20protected.md)
+- [How Filter Lock compares to Masqr](./misc/How%20Filter%20Lock.md%20compares%20to%20Masqr)

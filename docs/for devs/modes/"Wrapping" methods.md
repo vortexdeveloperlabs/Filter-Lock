@@ -1,8 +1,8 @@
-# "Wrapping" methods - Developer notes
+# "Wrapping" methods - Proposal - Developer notes
 
-> They will work by either redirecting to a new content type and extension or inject the HTML in a strange way.
+[Parent](../../modes/"Wrapping"%20methods.md)
 
-[Parent](../Index.md)
+The methods will work by either redirecting to a new content type and extension or inject the HTML in a strange way.
 
 ## srcdoc
 
@@ -42,15 +42,15 @@ If the encoding has patterns that :
 
 > Base64 encoding is used as a secondary layer, because real origin trials use Base64
 
-> A similar thing can be done with data:html;base64 URLs, but TODO: ...
+> A similar thing can be done with data:html;base64 URLs, but `TODO: ...`
 
 #### [Edge Origin Trials](https://microsoftedge.github.io/MSEdgeExplainers/origin-trials)
 
-> TODO: ...
+> `TODO: ...`
 
 #### [Mozilla Origin Trials](...)
 
-> TODO: ...
+> `TODO: ...`
 
 ### Conventional / standard file faking
 

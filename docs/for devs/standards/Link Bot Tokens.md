@@ -28,7 +28,7 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 > `SUB_ENCRYPTION_KEY`, `subEncrypt()`.
 
-They are shorthand for text subsitution-based (Ceaser Cypher-like) algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
+[Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
 
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
@@ -36,21 +36,21 @@ This is specifically for shifting the characters of the HMAC hashes, because all
 
 > `symEncrypt(`_msg_, _plaintext key_`)`.
 
-This is used to decrypt the Browser Fingerprints using the unhashed Network Fingerprints. This should be an ag.. I recommend using blowfish with a plaintext key with no nonce.
+[Symmetrical encryption](https://simple.wikipedia.org/wiki/Symmetric-key_algorithm) is used in this way to decrypt the Browser Fingerprints using the unhashed Network Fingerprints.. I recommend using blowfish with a plaintext key with no nonce.
 
 ### nonce
 
-> `Encode?(` `**nonce**` `)`
+> `Encode?(` **nonce** `)`
 
-A nonce is used to ensure these tokens are distinct adding a hint of entropy, so that they can't be generated easily or conflict with other identical fingerprints. It is the only thing that can't be assumed easily.
+A [nonce](https://datatracker.ietf.org/doc/html/rfc4949#:~:text=$%20nonce) is used to ensure these tokens are distinct adding a hint of entropy, so that they can't be generated easily or conflict with other identical fingerprints. It is the only thing that can't be assumed easily.
 
 The nonce should be at the end with the exception of optional features in the tokens. This is because the nonce is used in most cases, but it is at the end because there is little reason to parse the nonce at the end unless you make use of the optional features yourself.
 
 > The length of the nonce should be easily changeable and the nonce should be easily removeable by the proxy site hoster
 
-### The Discord Snowflake Tokens
+### The [Discord Snowflake IDs](https://discord.com/developers/docs/reference#snowflakes)
 
-This allows you to identify who the token is for, so that you can you can revoke their tokens.
+Using them in the key allows you to identify who the token is for, so that you can you can revoke their tokens.
 
 > It should be sub encrypted because the first few numbers of the Discord Snowflake obviously won't change much over a short period of time and a number of that length can easily be detected.
 
@@ -62,9 +62,9 @@ The UNIX timestamp allows for the tokens to be able to be dated, therefore allow
 
 ### HMAC hashing
 
-HMAC is a cryptographically secure hashing algorithm that is [natively supported in the browser](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#hmac). It is used to prevent the Filter Lock hoster from deanonymizing users based on their fingerprints, while still verifying them.
+[HMAC](https://www.wikiwand.com/en/HMAC) is a cryptographically secure hashing algorithm that is [natively supported in the browser](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/sign#hmac). It is used to prevent the Filter Lock hoster from deanonymizing users based on their fingerprints, while still verifying them.
 
-> The HMAC hash should use SHA-256 by default
+> The HMAC hash should use [SHA-256](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#algorithm) by default
 
 ## Tokens
 
@@ -75,30 +75,78 @@ When reading the token description keep in mind:
 - Ignore spacing here it is irrelevant
 - Anything bold in block quotes is a variable
 
-### One-time (Temp)
+## Filter Identification meta
 
-Token: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` `**nonce**` `)`
+JSON Schemas
+
+- [One-time Tokens]()
+
+[Here](./types/) are the corresponding TS types
+
+The JSON schema for the One-time Tokens
+
+#### The JSON schema for the One-time Token
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Filter Identification JSON for Private Tokens",
+  "type": "object",
+  "properties": {
+    "UserSelfReportedFilters": {
+        ... (inherited from the One-time Token)
+    },
+    "DetectedFilters": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "filter": {
+                "type": "string",
+                "$comment": "The shorthand name of the filter"
+            },
+            "filterType": {
+                "type": "",
+                "$comment": "The values can be NetworkLowLevel, DNS, or Extension. The distinction is because filtering companies often use different types of filtering methods.",
+            },
+          },
+          "required": ["filter", "filterType"]
+        }
+      ]
+    }
+  }
+}
+```
+
+### One-time (temp)
+
+Token: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**The user's Discord Snowflake ID**`)` `DELIMITER` `Encode?(` **Filter Identification JSON for One-time Tokens** `)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
-### Private (Persistant)
+### Private (persistant)
 
 > It's called Private, because it is locked to a certain device. This isn't something that you can share.
 
-`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
-
-Upon your initial and final usage of the PSK, the Filter Lock server middleware will inject a script that will set a cookie to the Private Tokens, which will be used to verify later requests.
+`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification JSON for Private Tokens** `)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 
 #### Network-identifiable fingerprint
 
-The UA and IP Address. This is verified on the server in Filter Lock's server middleware on every request. This is important, because the Browser-identifiable fingerprinting can be spoofed by the filter, especially dangerous when used in a request repeating attack.
+These fingerprints are verified on the server in Filter Lock's server middleware on every request. This is important, because the Browser-identifiable fingerprinting can be spoofed by the filter, especially dangerous when used in a request repeating attack.
+
+##### Methods used
+
+- The UA
+- IP Address
+- [JA3 hash](https://engineering.salesforce.com/tls-fingerprinting-with-ja3-and-ja3s-247362855967/)
+- [Akamai hash](https://privacycheck.sec.lrz.de/passive/fp_h2/fp_http2.html),
 
 #### Browser-identifiable fingerprint
 
 The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
 
-https://blog.amiunique.org/port-contention-goes-portable-port-contention-side-channels-in-web-browsers/
-https://blog.amiunique.org/an-explicative-article-on-drawnapart-a-gpu-fingerprinting-technique/
+##### Possible additional methods to consider adding on top of ThumbMarkJS
 
-https://forum.torproject.org/t/new-browser-fingerprinting-methods-ja3-and-akamai-hash/7649
-https://browserleaks.com/http2
+- [Port Contention](https://blog.amiunique.org/port-contention-goes-portable-port-contention-side-channels-in-web-browsers)
+- [drawnapart](https://blog.amiunique.org/an-explicative-article-on-drawnapart-a-gpu-fingerprinting-technique)

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Filter Identification JSON for One-time Tokens",
+  "type": "object",
+  "properties": {
+    "UserSelfReportedEmail": {
+      "type": "string",
+      "$comment": "This is the email of the user's account on a managed Chromebook. This is useful because school districts, school k12sysadmins, and teachers, may opt in to configuring site blocks and block category their way."
+    },
+    "UserSelfReportedFilters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/filterObject",
+        "$dynamicAnchor": "#/definitions/filterObject"
+      }
+    },
+    "DetectedFilters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/filterObject",
+        "$dynamicAnchor": "#/definitions/filterObject"
+      }
+    }
+  },
+  "definitions": {
+    "filterObject": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "$comment": "The shorthand name of the filter"
+        },
+        "filterType": {
+          "type": "string",
+          "$comment": "The value can be NetworkLowLevel, DNS, or Extension. The distinction is because filtering companies often use different types of filtering methods."
+        }
+      }
+    }
+  }
+}

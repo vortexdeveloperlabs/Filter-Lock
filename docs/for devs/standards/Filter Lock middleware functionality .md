@@ -2,9 +2,11 @@
 
 [Parent](../Index.md)
 
-## It has APIs
+The Filter Lock middleware's APIs should be universal in a language other than how the request and response objects differ
 
-Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](../For%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Token.md)".
+## It has HTTP APIs
+
+Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](../for%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Token.md)".
 
 ## Security
 
@@ -28,11 +30,11 @@ Static only mode will also require the site's HTML to be injected after it is lo
 
 #### In GAS (semi-static)
 
-You can get the user agent in the middleware through htmlOutput.getUserAgent(), however you can't get the IP Address.
+You can get the user agent in the middleware through `htmlOutput.getUserAgent()`, however you can't get the IP Address.
 
 ### When using the Private Token
 
-In the network request, if the Private Token is provided in the cookies. It will read it and try to get only the Network Fingerprint. If the fingerprint matches it will continue as below, [or else](#When-there-is-no-Private-Token-in-the-cookies).
+In the network request, if the Private Token is provided in the cookies. It will read it and try to get only the Network Fingerprint. If the fingerprint matches it will continue as below, [or else](#when-there-is-no-private-token-in-the-cookies).
 
 It will inject a script to your top of your site. It will read the token from the cookies and try to get only the [Browser Fingerprint](https://www.thumbmarkjs.com), if this fails it will reset cookies and reload, so that it can go to the decoy page.
 
