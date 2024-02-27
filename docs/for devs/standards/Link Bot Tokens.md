@@ -77,47 +77,7 @@ When reading the token description keep in mind:
 
 ## Filter Identification meta
 
-JSON Schemas
-
-- [One-time Tokens]()
-
-[Here](./types/) are the corresponding TS types
-
-The JSON schema for the One-time Tokens
-
-#### The JSON schema for the One-time Token
-
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Filter Identification JSON for Private Tokens",
-  "type": "object",
-  "properties": {
-    "UserSelfReportedFilters": {
-        ... (inherited from the One-time Token)
-    },
-    "DetectedFilters": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "filter": {
-                "type": "string",
-                "$comment": "The shorthand name of the filter"
-            },
-            "filterType": {
-                "type": "",
-                "$comment": "The values can be NetworkLowLevel, DNS, or Extension. The distinction is because filtering companies often use different types of filtering methods.",
-            },
-          },
-          "required": ["filter", "filterType"]
-        }
-      ]
-    }
-  }
-}
-```
+You can find the types inside of ./types
 
 ### One-time (temp)
 
