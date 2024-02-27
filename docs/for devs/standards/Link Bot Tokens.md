@@ -97,10 +97,10 @@ These fingerprints are verified on the server in Filter Lock's server middleware
 
 ##### Methods used
 
-- The UA
-- IP Address
-- [JA3 hash](https://engineering.salesforce.com/tls-fingerprinting-with-ja3-and-ja3s-247362855967/)
-- [Akamai hash](https://privacycheck.sec.lrz.de/passive/fp_h2/fp_http2.html),
+- [UA](https://www.rfc-editor.org/rfc/rfc9110#section-10.1.5) (http)
+- [The IP Address](https://www.iana.org/numbers)
+- [The JA3 hash](https://engineering.salesforce.com/tls-fingerprinting-with-ja3-and-ja3s-247362855967/) (tcp)
+- [The Akamai hash](https://privacycheck.sec.lrz.de/passive/fp_h2/fp_http2.html) (http/2)
 
 #### Browser-identifiable fingerprint
 
