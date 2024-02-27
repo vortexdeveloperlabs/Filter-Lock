@@ -8,9 +8,9 @@ import { CookieStore } from "cookie-observer";
 
 // cookieKeys exists because the cookies may be randomized to prevent detection
 
-// Private scope
+// User scope
 {
-    if (CookieStore.has(config.cookieKeys.privateToken)) {
+    if (CookieStore.has(config.cookieKeys.userToken)) {
 
     } else if (CookieStore.has(config.cookieKeys.oneTimeToken) {
 

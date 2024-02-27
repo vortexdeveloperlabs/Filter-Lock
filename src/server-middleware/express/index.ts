@@ -12,7 +12,11 @@ import {
   expressMiddleware as proxyCodeRandomizationExpressMiddleware,
 } from "./modes/proxy-file-randomization";
 
-export default function filterLockExpressMiddleware(
+function filterLockAPI() {}
+
+export function setupAPIs(app) {}
+
+export default function filterLockInjectsMiddleware(
   req: Request,
   res: Response,
   next: NextFunction

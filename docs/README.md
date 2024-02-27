@@ -19,7 +19,7 @@ In the documents linked here, you can find summaries of any method/mode or guide
 - per-server staff - This means staff in the proxy community's Discord server that have permission over the bot. It's usually used to make a distinction from the proxy bot hoster.
 - Types of tokens
   - Sync Token - See [this doc](./for%20devs/standards/Sync%20Token.md)
-  - One-time/Private Token - See [this doc](./for%20devs/standards/Link%20Bot%20Tokens.md)
+  - Access/User Token - See [this doc](./for%20devs/standards/Link%20Bot%20Tokens.md)
 
 > The lists are ordered by importance
 

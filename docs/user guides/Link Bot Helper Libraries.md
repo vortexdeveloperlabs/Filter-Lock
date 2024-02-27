@@ -81,7 +81,7 @@ The commands provided are (you don't need to implement these it already does the
 
 - /fl revokeUserKey `user`
 - /fl blocklistUser `user` - This should do the same as revokeKey, but also prevent the user from using the bot
-- /fl viewUserKeys `user?` - By default it will display all of the One-time Keys and Private Tokens with "`user` `key` `expiry`" with them being sorted alphanumberically. If the user argument is provided, it will show all of the keys registered with the user
+- /fl viewUserKeys `user?` - By default it will display all of the Access Keys and User Tokens with "`user` `key` `expiry`" with them being sorted alphanumberically. If the user argument is provided, it will show all of the keys registered with the user
 
 ### the Onboarding process
 
@@ -100,7 +100,7 @@ If you are a per-server staff with at least the permission level as set by the l
 #### User commands
 
 - /fl viewKeys - View your own keys
-- /fl resetKey - Revoke a key and regenerate and a new One-time Key to replace it. This will resend all of the links ever assigned to you, but with the One-time key attached to them.
+- /fl resetKey - Revoke a key and regenerate and a new Access Key to replace it. This will resend all of the links ever assigned to you, but with the Access key attached to them.
 
 ## Low level API
 

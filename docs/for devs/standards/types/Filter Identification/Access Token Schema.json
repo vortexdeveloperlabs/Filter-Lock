@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Filter Identification JSON for One-time Tokens",
+  "title": "Filter Identification JSON for Access Tokens",
   "type": "object",
   "properties": {
     "UserSelfReportedEmail": {

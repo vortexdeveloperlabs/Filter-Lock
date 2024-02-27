@@ -6,13 +6,13 @@ import { Blowfish } from 'egoroof-blowfish';
 
 // TODO: Move these types to a module in index.d.ts
 
-class PrivateTokenUtils {
-    privateToken: PrivateTokenTypes.PrivateToken;
+class UserTokenUtils {
+    userToken: UserTokenTypes.UserToken;
 
-    constructor(privateToken) {
-        this.privateToken = this.#deconstruct(privateToken);
+    constructor(userToken) {
+        this.userToken = this.#deconstruct(userToken);
     }
-    #deconstruct(privateToken: string): PrivateTokenTypes.PrivateToken {
+    #deconstruct(userToken: string): UserTokenTypes.UserToken {
         // Parse into segments
         const [subKey, subEnc_hmacHashed_NetworkFingerprint, subEnc_bfEnc_hmacHashed_BrowserFingerprint, encSnowflakeID, encTimestampStr, nonce] = id.split(config.delimiterChar);
     
@@ -42,7 +42,7 @@ class PrivateTokenUtils {
     
         return ret;
     }
-    verify(privateToken: PrivateToken, verifyPassthroughData: PrivateTokenTypes.NetworkVerifyPassthroughData): PrivateTokenTypes.NetworkVerifyRet  {
+    verify(userToken: UserToken, verifyPassthroughData: UserTokenTypes.NetworkVerifyPassthroughData): UserTokenTypes.NetworkVerifyRet  {
         const verifyPassthroughDataStr = JSON.stringify(verifyPassthroughData);
 
 
@@ -52,17 +52,17 @@ class PrivateTokenUtils {
     
         // Default
         return {
-            status: PrivateTokenTypes.TokenValidityStatus.PASS,
+            status: UserTokenTypes.TokenValidityStatus.PASS,
             violations: []
         }
     }
 }
 
 // If pass
-function verifyPrivateToken():  {
+function verifyUserToken():  {
 
 }
 
-export default checkPrivateToken;
+export default checkUserToken;
 // The deconstructors are also exported, for the use in the `.../listTokens` API endpoint
-export { deconstructPrivateToken };
+export { deconstructUserToken };

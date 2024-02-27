@@ -23,9 +23,9 @@ interface BaseIdentification {
   UserSelfReportedFilters: Filter[];
 }
 
-declare module "PrivateTokens" {
+declare module "UserTokens" {
   /**
-   * Filter Identification Typescript types that mirror the JSON schema for Private Tokens Tokens
+   * Filter Identification Typescript types that mirror the JSON schema for User Tokens Tokens
    */
   export interface Identification extends BaseIdentification {
     /**
@@ -37,7 +37,7 @@ declare module "PrivateTokens" {
 
 declare module "OneTimeTokens" {
   /**
-   * Filter Identification Typescript types that mirror the JSON schema for One-time Tokens
+   * Filter Identification Typescript types that mirror the JSON schema for Access Tokens
    */
   export interface Identification extends BaseIdentification {}
 }

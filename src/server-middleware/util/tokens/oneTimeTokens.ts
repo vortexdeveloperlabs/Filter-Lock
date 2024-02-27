@@ -1,4 +1,4 @@
-// TODO: Make the content oneTimeTokens.ts into a OneTimeTokenUtils class similar to PrivateTokenUtils.ts
+// TODO: Make the content oneTimeTokens.ts into a OneTimeTokenUtils class similar to UserTokenUtils.ts
 
 // The functionality decode function returned going to internally depend upon config.tokenType
 import decode from ...;
@@ -11,4 +11,4 @@ function deconstructOneTimeToken() {
 
 export default checkOneTimeToken;
 // The deconstructors are also exported, for the use in the `.../listTokens` API endpoint
-export { deconstructPrivateToken };
+export { deconstructUserToken };

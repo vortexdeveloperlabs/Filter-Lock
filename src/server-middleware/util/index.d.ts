@@ -80,11 +80,11 @@ declare module "OneTimeTokenTypes" {
   // TODO: ...
 }
 
-declare module "PrivateTokenTypes" {
+declare module "UserTokenTypes" {
   /**
-   * Interface representing a private dispenser locking token.
+   * Interface representing a user dispenser locking token.
    */
-  export interface PrivateToken {
+  export interface UserToken {
     /**
      * HMAC hash of the network-identifiable fingerprint, encrypted using the subEncryption key.
      * This value is used to verify the user's network fingerprint on the server side.
@@ -148,7 +148,7 @@ declare module "PrivateTokenTypes" {
   /**
    * Enumeration representing the validity status of a token.
    */
-  export enum PrivateTokenValidityStatus {
+  export enum UserTokenValidityStatus {
     /**
      * Token is valid.
      */
@@ -168,7 +168,7 @@ declare module "PrivateTokenTypes" {
   /**
    * Enumeration representing specific network fingerprint mismatch types.
    */
-  export enum PrivateTokenMismatchViolations {
+  export enum UserTokenMismatchViolations {
     /**
      * Fingerprintable headers mismatch in network fingerprint.
      */
@@ -197,12 +197,12 @@ declare module "PrivateTokenTypes" {
     /**
      * Status of the token verification.
      */
-    status: PrivateTokenValidityStatus;
+    status: UserTokenValidityStatus;
 
     /**
      * Optional array of specific violations detected in case of failure.
      * Only present if `status` is not `PASS`.
      */
-    violations?: PrivateTokenMismatchViolations[];
+    violations?: UserTokenMismatchViolations[];
   }
 }
