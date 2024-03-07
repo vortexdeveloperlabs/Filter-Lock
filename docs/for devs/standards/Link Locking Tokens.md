@@ -66,6 +66,10 @@ The UNIX timestamp allows for the tokens to be able to be dated, therefore allow
 
 > The HMAC hash should use [SHA-256](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#algorithm) by default
 
+## Filter Identification meta
+
+You can find the types inside of ./types
+
 ## Tokens
 
 > These are not called tokens, because in addition to it containing encrypted data it also contains less important potentially encoded data. I say potentially, because you can either use an encoding or encryption algorithm for all of the data, except for the HMAC hashes, since they are already encrypted.
@@ -74,10 +78,6 @@ When reading the token description keep in mind:
 
 - Ignore spacing here it is irrelevant
 - Anything bold in block quotes is a variable
-
-## Filter Identification meta
-
-You can find the types inside of ./types
 
 ### Access (temp)
 

@@ -1,4 +1,4 @@
-# Sync Token - Developer Notes
+# Sync Tokens - Developer Notes
 
 This isn't actually for the users, but for the per-server staff and proxy site hosters to securely link the Filter Lock middleware to a link bot.
 

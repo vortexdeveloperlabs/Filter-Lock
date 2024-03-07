@@ -1,4 +1,4 @@
-# Distributor Tokens
+# Distributor Tokens - Developer Notes
 
 `Unix Timestamp for the date of creation` `DELIMITER` `The Discord Server ID that is intended to be using it` `DELIMITER` `nonce`
 

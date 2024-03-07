@@ -12,27 +12,24 @@ import {
   expressMiddleware as proxyCodeRandomizationExpressMiddleware,
 } from "./modes/proxy-file-randomization";
 
-function filterLockAPI() {}
-
-export function setupAPIs(app) {}
-
+// For link bot locking and v arious modes
 export default function filterLockInjectsMiddleware(
   req: Request,
-  res: Response,
+  resp: Response,
   next: NextFunction
 ) {
-  proxyCodeRandomizationExpressMiddleware(req, res);
+  proxyCodeRandomizationExpressMiddleware(req, resp);
 
-  const origSend = res.send;
+  const origSend = resp.send;
   // TODO: also overwrite res.write and res.pipe
-  res.send = body => {
-    const ct = res.headers.get("content-type");
+  resp.send = body => {
+    const ct = resp.headers.get("content-type");
     if (ct !== null) {
       if (ct.startsWith("text/html")) {
         let bodyString: string | null = null;
 
         if (typeof body === "string") {
-          bodyString = res.body;
+          bodyString = resp.body;
         }
         // TODO: Convert the other possible types into a string
 
@@ -48,15 +45,15 @@ export default function filterLockInjectsMiddleware(
           }
 
           if (getConfig().proxyFileRandomization.enabled)
-            proxyCodeRandomizationHTMLHandler(doc, req, res);
-          // TODO: Implement Bare randomization
-          // TODO: Implement SEO Passthrough
-          // TODO: Implement text escaping
-          // TODO: Implement the rest of the modes
+            proxyCodeRandomizationHTMLHandler(doc, req, resp);
+          // TODO: Implement Bare randomization if enabled
+          // TODO: Implement SEO Passthrough if enabled
+          // TODO: Implement text escaping if enabled
+          // TODO: Implement the rest of the modes if enabled
         }
       }
     }
-    origSend.call(res, body);
+    origSend.call(resp, body);
   };
   next();
 }

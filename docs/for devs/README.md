@@ -13,11 +13,13 @@ Developer Notes are for those interested in developing your own implementation. 
 
 - [Filter Testing Methods](./methods/Filter%20Testing%20Methods.md)
 - [Link Bot Locking](./standards/Link%20Bot%20Tokens.md)
-
-  - [The Token System](./methods/Link%20Bot%20Tokens.md)
+- Tokens
+  - [The Link Bot Tokens](./methods/Link%20Bot%20Tokens.md)
     - [Network fingerprinting](./methods/Link%20Bot%20Tokens.md#Network-identifiable%20fingerprint)
-    - [Browser Fingerprinting](./methods/Link%20Bot%20Tokens.md#Browser-identifiable%20fingerprint)
-  - [Resource Tunneling](./Resource%20Tunneling.md)
+    - [Browser fingerprinting](./methods/Link%20Bot%20Tokens.md#Browser-identifiable%20fingerprint)
+  - [Distributor tokens](./standards/Distributor%20Tokens.md)
+  - [Sync tokens](./standards/Sync%20Tokens.md)
+- [Resource Tunneling](./Resource%20Tunneling.md)
 
 - [Filter Lock Link Bot Integration Guide](./Filter%20Lock%20Link%20Bot%20Integration%20Guide.md) (for link bot devs)
 

@@ -58,7 +58,7 @@ These are used in cooridination with the decoy page to verify the user
 > You must post the `User Token`
 
 - `Filter Lock API`/isSiteBlocked?link=`...` (POST)
-  - The post body: ...`DELIMITER` + `A JSON array of filter`
+  - The post body: ...`DELIMITER` + `A JSON array of filters`
   - It returns: a JSON response of a single property "isBlocked" with the value of a boolean
 
 It will fetch the APIs the filters themselves use for determining if a site is blocked. If the link is blocked on any of the filters that are

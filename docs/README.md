@@ -1,4 +1,4 @@
-## Table of contents
+## Table of Contents
 
 In the documents linked here, you can find summaries of any method/mode or guides for setting up Filter Lock for your proxy site or bot, but if you want a technical overview see [For developers](./for%20devs/Index.md).
 

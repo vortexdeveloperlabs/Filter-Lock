@@ -1,4 +1,4 @@
-# How to use the Link bot Integration Libraries
+` # How to use the Link bot Integration Libraries
 
 > [parent](../../../README.md)
 
@@ -83,7 +83,7 @@ The commands provided are (you don't need to implement these it already does the
 - /fl blocklistUser `user` - This should do the same as revokeKey, but also prevent the user from using the bot
 - /fl viewUserKeys `user?` - By default it will display all of the Access Keys and User Tokens with "`user` `key` `expiry`" with them being sorted alphanumberically. If the user argument is provided, it will show all of the keys registered with the user
 
-### the Onboarding process
+### The Onboarding process
 
 To link the bot to your Filter Lock Middleware instance through its APIs, the per-server staff must first run `/fl onboarding`. If it is already linked to another instance it will warn first and specify the instance details
 
@@ -121,3 +121,5 @@ const fl = new FilterLockIntegration`DB`({
 fl.appendKey(link, memberID);
 // `TODO: ...`
 ```
+
+`
