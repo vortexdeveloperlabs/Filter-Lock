@@ -1,8 +1,12 @@
 # TODO's
 
-- [ ] Make a TS typedef and generate schemas automatically
-- [ ] Create docs for docs.vyper.group
 - [ ] Finish creating the tsconfig.json files
+
+### Documentation
+
+- [ ] Fix MD links
+- [ ] Create docs for docs.vyper.group - Russel2259
+- [ ] Make a TS typedef and generate schemas automatically
 
 ### Filter Lock Server Implementations
 
@@ -22,10 +26,10 @@ interface Collection {
 #### Express/JS
 
 - [ ] Implement the Token Util classes
-  - [ ] Link Locking Tokens
+  - [ ] [Link Locking Tokens](./for%20devs/standards/Link%20Locking%20Tokens.md)
     - [ ] Access Tokens
     - [ ] User Tokens
-  - [ ] Sync Tokens - For Dispenser
+  - [ ] [Sync Tokens](./for%20devs/standards/Sync%20Tokens.md) - For Dispenser
 - [ ] Implement [the APIs](./for%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md)
 - [ ] Authentication APIs
   - [ ] Link Locking Tokens
