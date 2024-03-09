@@ -89,7 +89,19 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 > It's called User, because it is locked to a certain device. This isn't something that you can share.
 
-`SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification object for User Tokens** `)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
+The token is:
+
+- If using Double-layer TLS: `KA_SHARED_SECRET` `DELIMITER` `KA_DERIVATIVE_ENCRYPT(` `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(` **HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification object for User Tokens** `)` `)` `DELIMITER` **The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` **UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)` `)`
+
+> This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
+
+- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification object for User Tokens** `)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
+
+#### Shared Secret
+
+This is a part of [Double-layer TLS](./Double-layer%20TLS.md)
+
+I use KA as a shorthand for any key-agreement algorithm
 
 #### Network-identifiable fingerprint
 

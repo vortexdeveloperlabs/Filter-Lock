@@ -1,4 +1,4 @@
-# Arc.io Hider - Developer notes
+# Arc.io Hider - Developer notes - Proposal
 
 [Parent](../../modes/Arc.io%20Hider.md)
 

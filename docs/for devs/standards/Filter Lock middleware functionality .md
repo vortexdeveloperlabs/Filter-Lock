@@ -6,7 +6,7 @@ The Filter Lock middleware's APIs should be universal in a language other than h
 
 ## It has HTTP APIs
 
-Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](../for%20devs/standards/API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Token.md)".
+Since Filter Lock is configured different for each proxy Discord community, it is configured in the server itself, using their own link bot. This means that there needs to be [APIs available for it](./API%20Endpoints%20for%20Link%20Bot%20Locking.md) and more importantly a token to allow the changes to be made from the Discord bot iself. This token is called the "[Sync Token](./Sync%20Tokens.md)".
 
 ## Security
 

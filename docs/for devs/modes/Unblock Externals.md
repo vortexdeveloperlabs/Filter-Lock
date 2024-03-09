@@ -1,4 +1,6 @@
-# Unblock external:
+# Unblock Externals
+
+This will allow you to use cross origin resources without having to worry
 
 ## Resources
 
@@ -6,4 +8,4 @@ Inside of the site's SW, code will be injected, wherein whenever there is a cros
 
 ## Redirects
 
-Redirects will be intercepted using \[AeroSandbox](`TODO: ...`). A request will be posted to `Filter Lock API`/isSiteBlocked?link=`...` to determine if the site is blocked on the filters the user has.
+Redirects will be intercepted using \[AeroSandbox](`TODO: ...`). A request will be posted to `Filter Lock API`/isSiteBlocked?link=`...` to determine if the site is blocked on the filters the user has. Remember, the filters that the user is detailed in the user's token.

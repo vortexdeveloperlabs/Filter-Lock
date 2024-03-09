@@ -1,11 +1,11 @@
-# "Wrapping" methods - Proposal
+# "Wrapping" methods
 
-[Developer notes](../modes/"Wrapping"%20methods.md)
+[Developer notes](../for%20devs/modes/"Wrapping"%20methods.md)
 
-These are proposed methods for making Bare V4 endpoints and site content nearly undetectable, while also solve the problem of filters filtering based on what the HTML is to you (personalized blocking is common nowadays).
+These are proposed methods for making Bare V4 endpoints and site content nearly undetectable while also solving the problem of filtering based on what the HTML is to you (personalized blocking is common nowadays).
 
-With any of these methods, filters may start to catch-on. "Wrapping" methods are a cat and mouse game. Some are harder than others to block without sacrificing unintentionally blocking a large percent of sites that use that feature. The unintended consequence to these are they might catch on to these, so I will release them one by one. When one method gets caught on by a certain filter, I will make it so that it can fallback on another method, allowing there to always be a loophole. This would work by giving the links with filter information in the url fragment Additionally, through the configuration on Dispenser, you will be able to chain multiple together and add your own fallbacks.
+Filters may start to catch on with any of these methods. "Wrapping" methods are a cat-and-mouse game. Some are harder than others to block without sacrificing unintentionally blocking a large percent of sites that use that feature. The main concern of these is that they might catch on to them. When one method gets caught by a certain filter, it will be designed to fall back on another method, allowing there to always be a loophole. This will work by giving the links filter information in the URL fragment. Additionally, through the configuration on Dispenser, you will be able to chain multiples together and add your own fallbacks.
 
-> I recommend this to be to be used as a secondary layer too with Dispenser Locking, because it can still prevent local analysis.
+- Consider this to be inferior to Double-layer TLS and Resource Tunneling and this should used if you want to sacrifice undetectability for minor performance gains.
 
-TODO: Summarize the methods here
+TODO: Summarize the methods here in subsections...

@@ -2,4 +2,6 @@
 
 [Developer notes](../for%20devs/modes/SEO%20Passthrough.md)
 
-Anything that can promote SEO that a search crawler looking for will be present, specifically only revealing things that are compatible with the search crawler. The search crawler will be detected by the UA. This includes niche things like the React routes, albiet without functionality present.
+To promote SEO, all necessary elements for search crawlers will be present and visible, while withholding any information that is not authorized for the crawler. This includes niche components such as React routes, although functionality will not be included.
+
+The search crawler is detected through its User Agent (UA). It is important to note that this process may open a new vector for detection.

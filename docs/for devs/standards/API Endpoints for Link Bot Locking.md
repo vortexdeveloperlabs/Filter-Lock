@@ -4,9 +4,7 @@
 
 If the auth fails, no error is returned, instead it will pass the request to the next route, because these shouldn't be a problem.
 
-To prevent request repeating, the API endpoints are hashed. This does not apply to the endpoints used by Link Bots, since they have a special Token that won't be used anywhere by a browser. It will use the same [HMAC Hashing used in the Link Bot Tokens](../../for%20devs/standards/Link%20Bot%20Tokens.md#H), but to hash the API endpoint names. They will be hashed by the nonce used in the User Token itself. This is because the extensions can't peep the body of the requests, so they can't get the nonce, therefore they can't bruteforce the API endpoint name.
-
-TODO: I plan to write JSON schemas for the API endpoints
+- TODO: I plan to write JSON schemas for the API endpoints
 
 ## Used by
 
@@ -45,10 +43,8 @@ These are used in cooridination with the decoy page to verify the user
 
 ### [Site / Trading](../standards/Filter%20Lock%20middleware%20functionality%20.md#When-using-the-Access-Token)
 
-> You must post the `Access Token`
-
 - `Filter Lock API`/trade (POST)
-  - The post body: ...`DELIMITER` + `The Access token to trade with`
+  - The post body: `PUBLIC_KEY_FOR_KA` `DELIMITER` `The Access token to trade with`
   - It returns: the User Token and revokes the Access Token or `403` if the Access token is invalid
 
 > There is no form of encoding, because even with request repeating, it only works once, since the Access Token is revoked after this.
@@ -60,5 +56,7 @@ These are used in cooridination with the decoy page to verify the user
 - `Filter Lock API`/isSiteBlocked?link=`...` (POST)
   - The post body: ...`DELIMITER` + `A JSON array of filters`
   - It returns: a JSON response of a single property "isBlocked" with the value of a boolean
+
+> This may also be usedful for a link bot to use
 
 It will fetch the APIs the filters themselves use for determining if a site is blocked. If the link is blocked on any of the filters that are
