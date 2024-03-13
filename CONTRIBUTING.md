@@ -2,6 +2,8 @@
 
 This document is intended for those who want to help develop Filter Lock's official implementations or to improve the standard
 
+**ATTACH YOUR WORK IN A PR!**
+
 ## For those who want to improve the standard
 
 Please dicuss your proposals [here](https://discord.gg/2zweF7YMub).

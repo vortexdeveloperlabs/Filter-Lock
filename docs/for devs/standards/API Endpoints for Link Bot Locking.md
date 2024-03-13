@@ -33,7 +33,7 @@ These are used in cooridination with the decoy page to verify the user
 
 > This doesn't need any form of encoding, because it will never be used by the site itself and there not affectable by extension-based request repeating
 
-- `Filter Lock API`/genOneTimeToken (GET)
+- `Filter Lock API`/genAccessToken (GET)
   - It returns: `the Access Token` (body) with a `200` status code
 - `Filter Lock API`/revokeUserToken (POST)
   - The post body: ...`DELIMITER` + `The user token to revoke`

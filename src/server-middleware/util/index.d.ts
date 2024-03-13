@@ -1,6 +1,6 @@
-// These types are probably all wrong IDK I will look back at them later
+// These types are probably all wrong IDK I will look back at them later. FOR NOW JUST IGNORE THIS AND DON'T READ IT.
 
-declare module "UserTokenTypes" {
+declare module "AccessTokenTypes" {
 	export interface Token {
 		/**
 		 * The user's Discord snowflake ID.
@@ -82,7 +82,7 @@ declare module "UserTokenTypes" {
 	// TODO: ...
 }
 
-declare module "FinalUserTokenTypes" {
+declare module "FullUserTokenTypes" {
 	/**
 	 * Interface representing a user dispenser locking token.
 	 */
@@ -98,7 +98,7 @@ declare module "FinalUserTokenTypes" {
 		 * encrypted with the symmetric encryption key using the unhashed network fingerprint as a key.
 		 * This value is used to verify the user's browser fingerprint on the client side.
 		 */
-		bfEnc_hmacHashed_browserFingeprint: string;
+		subEnc_hmacHashed_browserFingeprint: string;
 
 		/**
 		 * The user's Discord snowflake ID.
