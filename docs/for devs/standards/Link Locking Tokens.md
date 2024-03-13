@@ -30,6 +30,8 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 [Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
 
+When it comes to substitution algorithms, there is no decode and encode. Substitution algorithms can be undone through the same function that made it.
+
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
 ### nonce
