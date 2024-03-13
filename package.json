@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/webcrypto": "^0.0.30"
+  }
+}

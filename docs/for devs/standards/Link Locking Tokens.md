@@ -32,12 +32,6 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
-#### Symmetrical encryption
-
-> `symEncrypt(`_msg_, _plaintext key_`)`.
-
-[Symmetrical encryption](https://simple.wikipedia.org/wiki/Symmetric-key_algorithm) is used in this way to decrypt the Browser Fingerprints using the unhashed Network Fingerprints.. I recommend using blowfish with a plaintext key with no nonce.
-
 ### nonce
 
 > `Encode?(` **nonce** `)`
@@ -95,13 +89,19 @@ The token is:
 
 > This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
 
-- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `symEncrypt(` `subEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification object for User Tokens** `)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
+- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt(`**HMAC Hash of the Network-identifiable Fingerprint**`)` `DELIMITER` `subEncrypt(` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `Encode?(` **Filter Identification object for User Tokens** `)` `)` `DELIMITER` `subEncrypt(`**The user's Discord snowflake ID**`)` `DELIMITER` `DELIMITER` `subEncrypt(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `Encode?(` **nonce** `)`
 
 #### Shared Secret
 
 This is a part of [Double-layer TLS](./Double-layer%20TLS.md)
 
 I use KA as a shorthand for any key-agreement algorithm
+
+#### Symmetrical encryption
+
+> `symEncrypt(`_msg_, _plaintext key_`)`.
+
+[Symmetrical encryption](https://simple.wikipedia.org/wiki/Symmetric-key_algorithm) is used in this way to decrypt the Browser Fingerprints using the unhashed Network Fingerprints. I recommend using blowfish with a plaintext key as the unhashed Network Fingerprinting with no nonce.
 
 #### Network-identifiable fingerprint
 
