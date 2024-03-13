@@ -87,11 +87,11 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 The token is:
 
-- If using Double-layer TLS: `KA_SHARED_SECRET` `DELIMITER` `KA_DERIVATIVE_ENCRYPT(` `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(` **Filter Identification object for User Tokens**`)` `DELIMITER` `subEncrypt?(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)` `)`
+- If using Double-layer TLS: `KA_SHARED_SECRET` `DELIMITER` `KA_DERIVATIVE_ENCRYPT(` `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` _Filter Identification object for User Tokens_ `DELIMITER` _The user's Discord snowflake ID_ `DELIMITER` _UNIX Timestamp at the time of creation_ `DELIMITER` _UNIX Timestamp for the expiry date_ `DELIMITER` _nonce?_ `)`
 
 > This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
 
-- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(` **Filter Identification object for User Tokens**`)` `DELIMITER` `subEncrypt?(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)`
+- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` `DELIMITER` `subEncrypt?(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce?** `)`
 
 #### Shared Secret
 

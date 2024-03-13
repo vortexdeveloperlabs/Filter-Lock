@@ -49,7 +49,7 @@ class UserTokenUtils {
 							unwrappedServerPrivKey,
 							KAEncrPartArrayBuffer
 						);
-					})
+					}, true));
 				);
 			// TODO: Add support for more KAAs
 		}
@@ -57,37 +57,57 @@ class UserTokenUtils {
 	}
 
 	// This is nowhere near finished
-	#deconstructWithRest(rest: any): UserTokenTypes.UserToken {
-		const [
-			subKey,
-			subEnc_HMACHashed_NetworkFingerprint,
-			subEnc_SymEncr_HMACHashed_BrowserFingerprint,
-			subEncSnowflakeID,
-			subEncCreationTimestampStr,
-			subEncExpiryTimestampStr,
-			subEncNonce,
-		] = rest;
+	#deconstructWithRest(rest: any, doubleLayerTLSEnabled = false)/*: UserTokenTypes.UserToken*/ {
+		let ret/*: UserTokenTypes.UserToken*/ = {};
+		if (doubleLayerTLSEnabled) {
+			// Remember that with Double Layer TLS enabled, Substitution Encryption is not necessary
+			const [
+				HMACHashed_NetworkFingerprint,
+				SymEncr_HMACHashed_BrowserFingerprint,
+				SnowflakeID,
+				CreationTimestampStr,
+				ExpiryTimestampStr,
+				Nonce,
+			] = rest;
+			ret = {
+				...rest
+			};
+		} else {
+			const [
+				subKey,
+				subEnc_HMACHashed_NetworkFingerprint,
+				subEnc_SymEncr_HMACHashed_BrowserFingerprint,
+				subEncSnowflakeID,
+				subEncCreationTimestampStr,
+				subEncExpiryTimestampStr,
+				subEncNonce,
+			] = rest;
 
-		const subDecrypter = new XORDecrypter(subKey);
+			const subDecrypter = new XORDecrypter(subKey);
 
-		let ret = {
-			hmacHashed_networkFingeprint: JSON.parse(
-				subDecrypter.decrypt(subEnc_HMACHashed_NetworkFingerprint)
-			),
-			symEncr_HMACHashed_browserFingeprint: JSON.parse(
-				subDecrypter.decrypt(
-					subEnc_SymEncr_HMACHashed_BrowserFingerprint
-				)
-			),
-			creationDate: new Date(
-				subDecrypter.decrypt(subEncCreationTimestampStr)
-			),
-			expiryDate: new Date(
-				subDecrypter.decrypt(subEncExpiryTimestampStr)
-			),
-			snowflakeID: subDecrypter.decrypt(subEncSnowflakeID),
-			nonce: subDecrypter.decrypt(subEncNonce),
-		};
+			ret = {
+				hmacHashed_networkFingeprint: JSON.parse(
+					subDecrypter.decrypt(subEnc_HMACHashed_NetworkFingerprint)
+				),
+				symEncr_HMACHashed_browserFingeprint: JSON.parse(
+					subDecrypter.decrypt(
+						subEnc_SymEncr_HMACHashed_BrowserFingerprint
+					)
+				),
+				creationDate: new Date(
+					subDecrypter.decrypt(subEncCreationTimestampStr)
+				),
+				expiryDate: new Date(
+					subDecrypter.decrypt(subEncExpiryTimestampStr)
+				),
+				snowflakeID: subDecrypter.decrypt(subEncSnowflakeID),
+				nonce: subDecrypter.decrypt(subEncNonce),
+			};
+
+			if (subEncNonce && config.nonce.enabled) {
+				ret.nonce = subEncNonce;
+			}
+		}
 
 		if (config.browserFingerprint.enabled) {
 			switch (config.browserFingerprint.symEncryptionType) {
@@ -98,10 +118,6 @@ class UserTokenUtils {
 						"Unsupported fingerprint encryption type; read the docs!"
 					);
 			}
-		}
-
-		if (subEncNonce && config.nonce.enabled) {
-			ret.nonce = subEncNonce;
 		}
 
 		return ret;
