@@ -1,6 +1,5 @@
 import config from ...;
-// The functionality subDecrypter function returned going to internally depend upon config.tokenType
-import XORDecrypter from "./crypto/XORDecryptors";
+import XORDecrypter from "./crypto/XORCypher";
 
 import { Blowfish } from 'egoroof-blowfish';
 
