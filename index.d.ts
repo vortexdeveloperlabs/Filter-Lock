@@ -7,7 +7,7 @@ declare namespace GlobalConfig {
 		modes: {
 			proxyFileRandomization: {
 				enabled: true;
-				handler: (fileName: string) => string;
+				handler: (fileName?: string) => string;
 			};
 			// TODO: Cont...
 		};
