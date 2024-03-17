@@ -71,7 +71,8 @@ This would add a property to the JSON, which will have the bare meta encoded on 
 
 These will return the site content as a comment inside of the file with randomized (per request) encryption of your choice
 
-> XOR is the default, but note that they might start detecting it cracking it soon due to it being a simple (Caeser Cypher-like encryption algorithm)
+> XOR is the default, but note that they might start detecting it cracking it soon due to it being a simple (Caeser Cypher-like encryption algorithm).
+
 > Supported conventions: sitemap.xml, robots.txt, or any SVG file
 
 XML-based templating will give you more concealing options (like how the HTML Origin Trials work)

@@ -6,9 +6,9 @@ It is ensured that the tokens cannot be intercepted by network filters, as every
 
 > Please do not conform to the NSA's recommandations for Elliptic Curve Cryptography; [see](https://en.wikipedia.org/wiki/Dual_EC_DRBG#:~:text=Weakness:%20a%20potential%20backdoor)
 
-- In most cases, [Resource Tunneling](./Resource%20Tunneling.md) and is the better option, but if you don't have access to a wisp server for some reason, this is the next best thing. Unlike Resource Tunneling, however, this method is undetectable.
+- In most cases, [Resource Tunneling](./Resource%20Tunneling.md) is the better option for the least overflow, but if you don't have access to a wisp server for some reason, this is the next best thing. Unlike Resource Tunneling, however, this method is undetectable.
 
-- This is an optional feature, because it adds overhead, and there is an alternative.
+- If you are only targeting extensions (not network filters) you should adopt [Extension Concealement](./Extension%20Concealment%20of%20Headers.md) instead. However if you are targeting both you should use this and [Extension Concealement](./Extension%20Concealment%20of%20Headers.md).
 
 ## Why is TLS not enough?
 
