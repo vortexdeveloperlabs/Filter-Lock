@@ -24,7 +24,7 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 #### Subsitution encryption
 
-> _SITE\\\_NAME_, `subEncrypt()`
+> _SUB\\\_KEY_, `subEncrypt()`
 
 > [Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) encryption algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
 
@@ -32,7 +32,7 @@ When it comes to substitution algorithms, there is no decode and encode. Substit
 
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
-This is the hostname of the proxy site and actually serves the purpose as being the encryption key, because the encryption key should be the same for everyone per a specific site. The reasoning is, if they have the site's hostname in their database (they know about it), they most definitely have the site blocked already.
+The key is a nonce that is different per every site.
 
 ### nonce
 
@@ -77,7 +77,7 @@ When reading the token description keep in mind:
 
 ### Access (temp)
 
-Token: _DELIMITER_ `subEncrypt?(`**The user's Discord Snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**Filter Identification object for Access Tokens**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?` `(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce**`)`
+Token: _SUB\\\KEY_ _DELIMITER_ `subEncrypt?(`**The user's Discord Snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**Filter Identification object for Access Tokens**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?` `(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce**`)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
@@ -87,11 +87,15 @@ By default it expires in 30 days, but this can be changed by the Filter Lock hos
 
 The token is:
 
-- If using Double-layer TLS: _KA\\\_SHARED\\\_SECRET_ _DELIMITER_ `KA_DERIVATIVE_ENCRYPT(`**SUB_ENCRYPTION_KEY** **DELIMITER** **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` **Filter Identification object for User Tokens** **DELIMITER** **The user's Discord snowflake ID** **DELIMITER** **UNIX Timestamp at the time of creation** **DELIMITER** **UNIX Timestamp for the expiry date** **DELIMITER** **nonce?**`)`
+- If using Double-layer TLS and HMAC Hashing: _KA\\\_SHARED\\\_SECRET_ _DELIMITER_ `KA_DERIVATIVE_ENCRYPT(`**SUB_ENCRYPTION_KEY** **DELIMITER** **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` **Filter Identification object for User Tokens** **DELIMITER** **The user's Discord snowflake ID** **DELIMITER** **UNIX Timestamp at the time of creation** **DELIMITER** **UNIX Timestamp for the expiry date** **DELIMITER** **nonce?**`)`
 
 > This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
 
-- Else: _DELIMITER_ **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` _DELIMITER_ `subEncrypt?(`**The user's Discord snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce?**`)`
+- If using HMAC Hashing: _SUB\\\KEY_ _DELIMITER_ **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` _DELIMITER_ `subEncrypt?(`**The user's Discord snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce?**`)`
+
+- Else: _SUB\\\KEY_ _DELIMITER_ **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `subEncrypt?(`**Browser-identifiable Fingerprint**`)`, `subEncrypt?(`**Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` _DELIMITER_ `subEncrypt?(`**The user's Discord snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce?**`)`
+
+> You might not want to use HMAC hashing for performance reasons?. Either way you should probably make it removeable.
 
 #### Shared Secret
 
