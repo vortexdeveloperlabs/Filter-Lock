@@ -2,6 +2,8 @@
 
 `TODO: ...`
 
+One thing that Filter Testing is flawed on is the low immunity from Network Filters. This means that, network filters are able to "grant" themselves their own key through one spoofed API call by the filter's backend. This is because there is no one-time "[Access Token](../for%20devs/standards/Link%20Locking%20Tokens.md)" that is locked behind Discord, where there is actually some form of vetting before you can get your link. It's tedious to make a Discord alts and to get a new unblocked link to be blocked. It obviously can't be automated on the spot. Discord has many rate limits and sometimes requires Phone Numbers if your IP has many accounts in addition to the email you have to provide. I lightly believe emails are too easy to create by themselves, but Discord has enough safeguards to the point where it it should be valued enough to vet.
+
 ## Extension testing methods
 
 Keep in mind, these are methods to guess if an extension is used. They are not perfect.
