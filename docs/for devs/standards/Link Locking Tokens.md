@@ -32,10 +32,6 @@ When it comes to substitution algorithms, there is no decode and encode. Substit
 
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
-#### _SITE\\\_HOST_
-
-This is the domain of the proxy site and actually serves the purpose as being the encryption key, because the encryption key should be the same for everyone per a specific site. The reasoning is, if they have the site domain in their database (they know about it), they most definitely have the site blocked already.
-
 ### nonce
 
 > `subEncrypt(`**nonce**`)`
@@ -45,6 +41,8 @@ A [nonce](https://datatracker.ietf.org/doc/html/rfc4949#:~:text=$%20nonce) is us
 The nonce should be at the end with the exception of optional features in the tokens. This is because the nonce is used in most cases, but it is at the end because there is little reason to parse the nonce at the end unless you make use of the optional features yourself.
 
 > The length of the nonce should be easily changeable, but the nonce shouldn't be removable by the hoster because it is the only way to issue multiple similar tokens. XOR keys aren't enough because they are different per each
+
+This is the domain of the proxy site and actually serves the purpose as being the encryption key, because the encryption key should be the same for everyone per a specific site. The reasoning is, if they have the site domain in their database (they know about it), they most definitely have the site blocked already.
 
 ### The [Discord Snowflake IDs](https://discord.com/developers/docs/reference#snowflakes)
 
@@ -79,7 +77,7 @@ When reading the token description keep in mind:
 
 ### Access (temp)
 
-Token: _DELIMITER_ `subEncrypt?(`**The user's Discord Snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**Filter Identification object for Access Tokens**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?` `(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce**`)` _DELIMITER_ _SITE\\\_NAME?_
+Token: _DELIMITER_ `subEncrypt?(`**The user's Discord Snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**Filter Identification object for Access Tokens**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?` `(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce**`)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
@@ -93,7 +91,7 @@ The token is:
 
 > This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
 
-- Else: _DELIMITER_ **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` _DELIMITER_ `subEncrypt?(`**The user's Discord snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce?**`)` _DELIMITER_ _SITE\\\_NAME?_
+- Else: _DELIMITER_ **HMAC Hash of the Network-identifiable Fingerprint** _DELIMITER_ `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` _DELIMITER_ `subEncrypt?(`**The user's Discord snowflake ID**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` _DELIMITER_ `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` _DELIMITER_ `subEncrypt?(`**nonce?**`)`
 
 #### Shared Secret
 
