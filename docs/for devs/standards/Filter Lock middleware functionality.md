@@ -1,7 +1,5 @@
 # What the Filter Lock middleware does - Developer Notes
 
-[Parent](../Index.md)
-
 The Filter Lock middleware's APIs should be universal in a language other than how the request and response objects differ
 
 ## It has HTTP APIs
