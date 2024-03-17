@@ -1,7 +1,5 @@
 # Dispenser Locking's Tokens - Developer notes
 
-[Parent](../README.md)
-
 ## The purpose of the:
 
 This documents components that both the tokens use:
