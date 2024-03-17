@@ -1,4 +1,4 @@
-declare namespace GlobalConfig {
+declare namespace MiddlewareConfig {
 	export interface ISubCypher {
 		new (key: string);
 		cipher(data: string): string;
@@ -41,11 +41,41 @@ declare namespace GlobalConfig {
 							enabled: boolean;
 							networkFingerprint: {
 								enabled: boolean;
+								JA3: boolean;
+								// TODO: ...
 							};
 							browserFingerprint: {
 								enabled: boolean;
 							};
 						};
+					};
+				};
+				filterLockTesting: {
+					enabled: true;
+					extensionDetection: {
+						enabled: boolean;
+						/** Enabling this makes it so that on the object of the Browser Fingerprints will have data collected from the testing that can be configured in this object. This works even if Filter Lock Testing is disabled. */
+						useInBrowserFingerprints: boolean;
+
+						throughPingingResources: {
+							enabled: true;
+							/**
+							 * key - A URL that is not CORS protected
+							 * value - The extension IDs where the URL is known blocked on. If Link Bot Linking is enabled.
+							 */
+							map: Map<string, string[]>;
+						};
+						throughPingingConnection: {
+							enabled: boolean;
+						};
+						throughNetworkTesting: {
+							enabled: boolean;
+							/** An array of the IDs to hopefully all extension filters */
+							knownFilters: string[];
+						};
+					};
+					requestDetection: {
+						enabled: boolean;
 					};
 				};
 			};

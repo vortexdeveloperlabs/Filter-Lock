@@ -5,7 +5,7 @@ import XORCypher from "./src/server-middleware/util/tokens/crypto/XORCypher";
 
 const nonceLen = 10;
 
-const config: GlobalConfig.Config = {
+const config: MiddlewareConfig.Config = {
 	modes: {
 		proxyFileRandomization: {
 			enabled: true,
@@ -52,6 +52,27 @@ const config: GlobalConfig.Config = {
 						},
 					},
 				},
+			},
+		},
+		filterLockTesting: {
+			enabled: true,
+			extensionDetection: {
+				enabled: true,
+				throughPingingResources: {
+					enabled: true,
+					map: new Map(),
+				},
+				throughPingingConnection: {
+					enabled: true,
+				},
+				throughNetworkTesting: {
+					enabled: true,
+					/** An array of the IDs to hopefully all extension filters */
+					knownFilters: [""],
+				},
+			},
+			requestDetection: {
+				enabled: true,
 			},
 		},
 	},

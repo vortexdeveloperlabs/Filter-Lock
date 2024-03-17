@@ -124,6 +124,8 @@ These fingerprints are verified on the server in Filter Lock's server middleware
 
 - The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
 
+- A list of the extensions the user uses that are guessed with the same methods used in [Filter Testing](../../methods/Link%20Bot%20Linking.md)
+
 ##### Possible additional methods to consider adding on top of ThumbMarkJS
 
 - [Port Contention](https://blog.amiunique.org/port-contention-goes-portable-port-contention-side-channels-in-web-browsers)
