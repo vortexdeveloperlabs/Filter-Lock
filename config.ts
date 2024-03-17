@@ -1,15 +1,18 @@
 import defaultProxyFileRandomizer from "./src/server-middleware/util/modes/defaultProxyFileRandomizer";
 
-import XORCypher from "./util/tokens/crypto/XORCypher";
+import { genNonce } from "./src/server-middleware/util/tokens/crypto/genNonce";
+import XORCypher from "./src/server-middleware/util/tokens/crypto/XORCypher";
+
+const nonceLen = 10;
 
 const config: GlobalConfig.Config = {
 	modes: {
 		proxyFileRandomization: {
-			enabled: true;
-			handler: (fileName: string) => string;
-		};
+			enabled: true,
+			handler: () => genNonce(nonceLen),
+		},
 		// TODO: Cont...
-	};
+	},
 	proxyFileRandomization: {
 		enabled: true,
 		handler: defaultProxyFileRandomizer(5, 15),
@@ -24,34 +27,34 @@ const config: GlobalConfig.Config = {
 				tokens: {
 					subEncrypt: {
 						/** Recommended to be true. */
-						enabled: boolean;
+						enabled: true,
 						/** Recommended to use XORCypher. Security isn't too much of a concern here and I would prioritize speed. */
-						cipher: ICypher;
+						cipher: XORCypher,
 						/** Recommended to be true. */
-						encryptNonce: boolean;
-					};
+						encryptNonce: true,
+					},
 					/** This is useless if network or browser fingerprints are disabled. */
 					symEncryption: {
 						/** Recommended to be true. */
-						enabled: true;
+						enabled: true,
 						/** Recommended to be "blowfish". */
-						symEncryptionType: "blowfish";
-					};
+						symEncryptionType: "blowfish",
+					},
 					/** The fingerprinting is what actually provides the defense to Filter Lock. So, disabling it would be highly
 					 * discouraged. */
 					fingerprint: {
-						enabled: true;
+						enabled: true,
 						networkFingerprint: {
-							enabled: true;
-						};
+							enabled: true,
+						},
 						browserFingerprint: {
-							enabled: true;
-						};
-					};
-				};
-			};
-		};
-	};
+							enabled: true,
+						},
+					},
+				},
+			},
+		},
+	},
 	doubleLayerTLS: {
 		enabled: true,
 		encryptHeaders: true,
