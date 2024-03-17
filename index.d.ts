@@ -19,6 +19,7 @@ declare namespace GlobalConfig {
 				linkBotLocking: {
 					enabled: boolean;
 					tokens: {
+						nonceLen: number;
 						subEncrypt: {
 							/** Recommended to be true. */
 							enabled: boolean;
