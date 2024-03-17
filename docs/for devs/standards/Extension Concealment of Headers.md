@@ -20,7 +20,7 @@ The unused (to be used) reserved headers will be formatted as such: _Magic Keywo
 
 ### Magic Keyword
 
-The headers unused reserved headers will have a magic keyword in the front. This will be used to denote that the value in those headers shouldn't matter. The magic keyword will be different per site, just like how the XOR key is different per site. In fact it should be stored in the same DB as the XOR key on the same collection.
+The headers unused reserved headers will have a magic keyword in the front. This will be used to denote that the value in those headers shouldn't matter. The magic keyword will be different per site, just like how the sub key is different per site. In fact it should be stored in the same DB as the sub key on the same collection.
 
 ### Index
 
