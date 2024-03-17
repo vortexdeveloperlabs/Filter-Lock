@@ -6,4 +6,4 @@ Please see the [documentation](./docs/README.md)
 
 > The official JS implementation can be found in src/. Anything you see there will most likely change because the code is not finished yet. Don't attempt to use it. Not even the TODO's or docs are fully completed yet and some are outdated!
 
-The best way to use Filter Lock is to reserve a certain % of your links to be Link Bot Locked and the rest to use Filter Testing. Also have demo links for those who aren't subject to filtering or to a lesser extent.
+The best way to use Filter Lock is to reserve a certain % of your links to be Link Bot Verification and the rest to use Filter Testing for unlocking. These should be subdivided themselves into ones for network filters (Double-layer TLS), extension filters, and both. Also, have demo links for those who aren't subject to filtering or to a lesser extent. For the locked links
