@@ -1,8 +1,7 @@
 // TODO: Import the config - import config from ...; - Whimsy
 
-import XORDecrypter from "./crypto/XORCypher";
-
-// FIXME: If it says object as the type (non-implicit), that means that I don't yet have a type written out for it in index.d.ts - Ryan (I'm quite busy rn)
+import getConfig from "../../util/getConfig";
+const config = getConfig();
 
 /**
  * This should only be used by the Filter Lock API (server-only). This isn't made for anything else.
@@ -25,7 +24,7 @@ class AccessTokenUtils {
 		userFilterIdentificationObject: object
 	): string {
 		// TODO: Generate and return the Access Token as per the spec - Whimsy
-		return "";
+		return this.accessToken;
 	}
 
 	/**
@@ -37,7 +36,7 @@ class AccessTokenUtils {
 		const parts = accessToken.split(config.delimiterChar);
 
 		// TODO: Deconstruct and return the Access Token as per the spec - Whimsy
-		return {};
+		return { parts };
 	}
 
 	/**

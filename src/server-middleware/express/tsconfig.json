@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "moduleResolution": "NodeNext",
-    "types": ["node"]
+    "paths": {
+      "config": ["../../../config.ts"]
+    }
   },
-  "include": ["**/*.ts", "index.d.ts", "index.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
