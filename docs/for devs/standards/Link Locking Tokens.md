@@ -24,7 +24,7 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 #### Subsitution encryption
 
-> `SITE_NAME`, `subEncrypt()`.
+> `SITE_NAME`, `subEncrypt()`
 
 > [Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) encryption algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
 
@@ -79,7 +79,7 @@ When reading the token description keep in mind:
 
 ### Access (temp)
 
-Token: `SUB_ENCRYPTION_KEY?` `DELIMITER` `subEncrypt?(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt?(` **Filter Identification object for Access Tokens** `)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)`
+Token: `DELIMITER` `subEncrypt?(`**The user's Discord Snowflake ID**)` `DELIMITER` `subEncrypt?(`**Filter Identification object for Access Tokens**`)` `DELIMITER` `subEncrypt?(`__UNIX Timestamp at the time of creation__)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)` `DELIMITER` `SITE_NAME?`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
@@ -93,7 +93,7 @@ The token is:
 
 > This doesn't need to have [Subsitution encryption](#subsitution-encryption), because it is KA encrypted already.
 
-- Else: `SUB_ENCRYPTION_KEY` `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` `DELIMITER` `subEncrypt?(`**The user's Discord snowflake ID**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce?** `)`
+- Else: `DELIMITER` **HMAC Hash of the Network-identifiable Fingerprint** `DELIMITER` `symEncrypt(`**HMAC Hash of the Browser-identifiable Fingerprint**, **The unhashed Network-identifiable Fingerprint**`)` `subEncrypt?(`**Filter Identification object for User Tokens**`)` `DELIMITER` `subEncrypt?(`_The user's Discord snowflake ID_`)` `DELIMITER` `subEncrypt?(`_UNIX Timestamp at the time of creation_`)` `DELIMITER` `subEncrypt?(`_UNIX Timestamp for the expiry date_`)` `DELIMITER` `subEncrypt?(` _nonce?_ `)` `DELIMITER` `SITE_NAME?`
 
 #### Shared Secret
 
@@ -120,7 +120,9 @@ These fingerprints are verified on the server in Filter Lock's server middleware
 
 #### Browser-identifiable fingerprint
 
-The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
+##### Methods used
+
+- The user's [ThumbMarkJS ID](https://www.thumbmarkjs.com). This is better protects from the user possibly spoofing the token with Bookmarklets or Devtools. This is useful when your IP Address is from the School and they have School Chromebooks, which are pinned to a specific version. This layer makes you specifically stand out from the other students.
 
 ##### Possible additional methods to consider adding on top of ThumbMarkJS
 
