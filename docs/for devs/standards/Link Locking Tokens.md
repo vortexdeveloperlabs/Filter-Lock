@@ -6,7 +6,7 @@
 
 This documents components that both the tokens use:
 
-> The question mark means that the specified thing isn't done by default not optional. Optional features are specified in the children (subheadings below).
+> The question mark means that the respective keyword in the token isn't done by default and is therefore optional. Optional features are specified in the children (subheadings below).
 
 The actual cookie names that are used for the token should be randomized and different per proxy site link. For now in my implementation, I have it so that it is something set in the config that applies to all of the proxy site links from the hoster, but I would like to have it so there is a KV store that correlates proxy site origins to their own randomized names (using genNonce) with the nonce length also being randomized.
 
@@ -26,23 +26,27 @@ You may also want to allow the proxy site hoster to specify what kind of encrypt
 
 #### Subsitution encryption
 
-> `SUB_ENCRYPTION_KEY`, `subEncrypt?()`.
+> `SITE_NAME`, `subEncrypt()`.
 
-[Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
+> [Subsitution encryption](https://www.csfieldguide.org.nz/en/chapters/coding-encryption/substitution-ciphers) is used in this way as a shorthand for text subsitution-based (Ceaser Cypher-like) encryption algorithms. Sub encryption should be optional, but all instances of them should be used by default. I recommend using XOR for this. These aren't meant to add any extra layer of cryptographic security.
 
 When it comes to substitution algorithms, there is no decode and encode. Substitution algorithms can be undone through the same function that made it.
 
 This is specifically for shifting the characters of the HMAC hashes, because all the can be detected by filters through searching for patterns. It is also used to shuffle around the numbers in the Discord Snowflake. This precaution adds a bit of entropy to make it more expensive to detect these tokens.
 
+#### `SITE_HOST`
+
+This is the domain of the proxy site and actually serves the purpose as being the encryption key, because the encryption key should be the same for everyone per a specific site. The reasoning is, if they have the site domain in their database (they know about it), they most definitely have the site blocked already.
+
 ### nonce
 
-> `subEncrypt?(` **nonce** `)`
+> `subEncrypt(` **nonce** `)`
 
 A [nonce](https://datatracker.ietf.org/doc/html/rfc4949#:~:text=$%20nonce) is used to ensure these tokens are distinct adding a hint of entropy, so that they can't be generated easily or conflict with other identical fingerprints. It is the only thing that can't be assumed easily.
 
 The nonce should be at the end with the exception of optional features in the tokens. This is because the nonce is used in most cases, but it is at the end because there is little reason to parse the nonce at the end unless you make use of the optional features yourself.
 
-> The length of the nonce should be easily changeable and the nonce should be easily removeable by the proxy site hoster
+> The length of the nonce should be easily changeable, but the nonce shouldn't be removable by the hoster because it is the only way to issue multiple similar tokens. XOR keys aren't enough because they are different per each
 
 ### The [Discord Snowflake IDs](https://discord.com/developers/docs/reference#snowflakes)
 
@@ -77,7 +81,7 @@ When reading the token description keep in mind:
 
 ### Access (temp)
 
-Token: `SUB_ENCRYPTION_KEY` `DELIMITER` `subEncrypt?(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt?(` **Filter Identification object for Access Tokens** `)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt??(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)`
+Token: `SUB_ENCRYPTION_KEY?` `DELIMITER` `subEncrypt?(`**The user's Discord Snowflake ID**`)` `DELIMITER` `subEncrypt?(` **Filter Identification object for Access Tokens** `)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp at the time of creation**`)` `DELIMITER` `subEncrypt?(`**UNIX Timestamp for the expiry date**`)` `DELIMITER` `subEncrypt?(` **nonce** `)`
 
 By default it expires in 30 days, but this can be changed by the Filter Lock hoster through the link bot. This token will only be valid once
 
