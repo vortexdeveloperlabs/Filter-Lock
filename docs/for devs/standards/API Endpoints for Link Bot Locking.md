@@ -29,7 +29,7 @@ The tokens here are used in the onboarding process
 
 These are used in cooridination with the decoy page to verify the user
 
-> With all of these must post: `API_TOKEN` `DELIMITER` `The user's Discord Snowflake ID`. Not to be confused with the user tokens.
+> With all of these must post: [_API\\\_TOKEN_](./Link%20Locking%20Tokens.md#access-temp) _DELIMITER_ _The user's Discord Snowflake ID_. Not to be confused with the user tokens.
 
 > This doesn't need any form of encoding, because it will never be used by the site itself and there not affectable by extension-based request repeating
 
