@@ -48,7 +48,7 @@ interface Collection {
 
 ### Filter Lock Browser Implementation
 
--
+- Writes test cases for the Browser SDK that expect to fail
 
 ```
 

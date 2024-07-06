@@ -17,7 +17,7 @@ const fl = new FilterLockBrowserIntegration({
 ## Trading
 
 ```ts
-const ott = fl.tradeForPT(OTT); // This will trade the One Time key for the User Token
+const ut = fl.tradeForUT(OTT); // This will trade the One Time key for the User Token
 
 if (ott.isOk()) {
 } else {
