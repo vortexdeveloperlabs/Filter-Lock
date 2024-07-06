@@ -5,8 +5,12 @@
 ### Documentation
 
 - [ ] Fix MD links
-- [ ] Create docs for docs.vyper.group - Russel2259
+- [ ] Create docs for docs.vyper.group
 - [ ] Make a TS typedef and generate schemas automatically
+
+### Configure editor integrations
+
+- [ ] VSCode setup default formatters and enable format on save
 
 ### Filter Lock Server Implementations
 
