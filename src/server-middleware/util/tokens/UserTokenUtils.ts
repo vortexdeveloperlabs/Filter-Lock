@@ -4,6 +4,17 @@ import XORDecrypter from "./crypto/XORCypher";
 
 import { Blowfish } from "egoroof-blowfish";
 
+/** It is either one or the other. Having substitution encryption with encryption from a ECDH supported crypto algorithm is redundant. */
+type BasicEncAlgo = {
+	type: "KAA",
+	/** This is the private key used in the key-agreement algorithm. */
+	key: string
+} | {
+	type: "SUB",
+	/** The hostname of the site. This is used as a key for subEncrypt(). This shouldn't be provided if you are using a KAA (have something set for). */
+	key: string
+}
+
 class UserTokenUtils {
 	userToken: UserTokenTypes.UserToken;
 
@@ -23,13 +34,12 @@ class UserTokenUtils {
 	 *This is used inside of the
 	 * @param userToken This is the user token that the Filter Lock Browser Helper library has provided to the Filter Lock middleware
 	 * @param networkInfo This is the same type of fingerprints on the network that is in the User Token, but except for the API request to ensure that nobody malicious is making the request for the user (E.g. extension repeating)
-	 * @param KAServerPrivKey This is the private key used in the key-agreement that is stored by the Filter Lock middleware.
 	 * @returns TODO: ...
 	 */
 	deconstruct(
 		userToken: string,
 		networkInfo: FullUserTokenTypes.NetworkVerifyPassthroughData,
-		KAServerPrivKey: string
+		algo: BasicEncAlgo,
 	): UserTokenTypes.UserToken {
 		const parts = userToken.split(config.delimiterChar);
 		// Parse into segments
@@ -52,6 +62,8 @@ class UserTokenUtils {
 					}, true));
 				);
 			// TODO: Add support for more KAAs
+		} else {
+			// TODO: The standard with sub encryption...
 		}
 		return this.#deconstructWithRest(parts);
 	}

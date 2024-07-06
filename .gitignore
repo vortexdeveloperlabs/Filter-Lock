@@ -1,2 +1,11 @@
-node_modules
+# NPM
+/**/package-lock.json
+/**/node_modules/
+## For NixOS
+/**/mutable_node_modules
+
+# Webpack
+/**/dist/
+
+# Config
 config.ts

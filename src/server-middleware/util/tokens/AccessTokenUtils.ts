@@ -1,6 +1,6 @@
 // TODO: Import the config - import config from ...; - Whimsy
 
-import getConfig from "../../util/getConfig";
+import getConfig from "../getConfig";
 const config = getConfig();
 
 /**
@@ -32,7 +32,7 @@ class AccessTokenUtils {
 	 * @param accessToken The raw access token
 	 * @returns The parsed Access Token
 	 */
-	deconstruct(accessToken: string): object {
+	deconstruct(accessToken: string, host: string): object {
 		const parts = accessToken.split(config.delimiterChar);
 
 		// TODO: Deconstruct and return the Access Token as per the spec - Whimsy
