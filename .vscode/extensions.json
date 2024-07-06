@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "marcoq.vscode-typescript-to-json-schema",
+    "yoavbls.pretty-ts-errors",
+    "mizchi.markdown-code-features",
+    "mathiassoeholm.markdown-link-updater",
+    "wayou.vscode-todo-highlight",
+    "fabiospampinato.vscode-markdown-todo",
+    "bierner.markdown-checkbox",
+    "gruntfuggly.todo-tree"
+  ]
+}
