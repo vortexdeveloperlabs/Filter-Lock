@@ -11,5 +11,5 @@ The best way to use Filter Lock is to reserve a certain % of your links to be Li
 ## The three parts to Filter Lock:
 
 - Filter Lock Middleware: this is what the proxy site dev sets-up
-  - Filter Lock Browser Library: this is automatically injected by the Filter Lock Middleware, so you don't have to worry about it as a user
+- Filter Lock Browser Library: this is automatically injected by the Filter Lock Middleware, so you don't have to worry about it as a user
 - Filter Lock Link Bot - only needs to be implemented by the link bot devs and is only needed if you use the Link Bot Locking feature
